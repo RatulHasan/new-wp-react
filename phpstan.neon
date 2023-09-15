@@ -5,4 +5,4 @@ parameters:
 	excludePaths:
 		- tests
 	bootstrapFiles:
-	    - pay-check-mate.php
+	    - [demo].php

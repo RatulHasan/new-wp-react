@@ -19,6 +19,7 @@
         "payroll system software"
     ],
     "scripts": {
+        "create": "node bin/initiate",
         "start": "wp-scripts start",
         "start:hot": "wp-scripts start --hot",
         "build": "NODE_ENV=development wp-scripts build",
