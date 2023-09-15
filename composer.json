@@ -1,0 +1,46 @@
+{
+    "name": "ratulhasan/pay-check-mate",
+    "description": "Pay Check Mate is a powerful and user-friendly payroll management solution that simplifies the payroll process for businesses of all sizes.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ]
+    },
+    "authors": [
+        {
+            "name": "ratulhasan",
+            "email": "ratuljh@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "dev-develop",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
+        "tareq1988/wp-php-cs-fixer": "dev-master",
+        "phpcompatibility/phpcompatibility-wp": "dev-master",
+        "phpstan/phpstan": "1.11.x-dev",
+        "szepeviktor/phpstan-wordpress": "dev-master",
+        "phpstan/extension-installer": "^1.3",
+        "wp-phpunit/wp-phpunit": "dev-master",
+        "yoast/phpunit-polyfills": "^2.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "PayCheckMate\\": "includes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": { "PayCheckMate\\Tests\\": "tests/phpunit/" }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
+    }
+}

@@ -1,0 +1,8 @@
+parameters:
+	level: 6
+	paths:
+		- includes
+	excludePaths:
+		- tests
+	bootstrapFiles:
+	    - pay-check-mate.php

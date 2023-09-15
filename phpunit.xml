@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="tests/phpunit/bootstrap.php" backupGlobals="false" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd" cacheDirectory=".phpunit.cache">
+  <php>
+    <env name="WP_PHPUNIT__TESTS_CONFIG" value="tests/phpunit/wp-tests-config.php"/>
+  </php>
+  <testsuites>
+    <testsuite name="unit">
+      <directory prefix="" suffix=".php">./tests/phpunit/</directory>
+      <exclude>./tests/phpunit/wp-tests-config.php</exclude>
+    </testsuite>
+  </testsuites>
+  <coverage includeUncoveredFiles="true" pathCoverage="false" ignoreDeprecatedCodeUnits="true" disableCodeCoverageIgnore="true"/>
+  <source>
+    <include>
+      <directory suffix=".php">includes</directory>
+    </include>
+  </source>
+</phpunit>
