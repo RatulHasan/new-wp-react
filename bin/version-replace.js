@@ -3,7 +3,7 @@ const replace = require( 'replace-in-file' );
 
 const pluginFiles = [
 	'includes/**/*',
-	'pay-check-mate.php',
+	'plugin_name.php',
 ];
 
 const { version } = JSON.parse( fs.readFileSync( 'package.json' ) );
@@ -11,7 +11,7 @@ const { version } = JSON.parse( fs.readFileSync( 'package.json' ) );
 replace(
 	{
 		files: pluginFiles,
-		from: /PAY_CHECK_MATE_SINCE/g,
+		from: /[PLUGIN_NAME]_VERSION/g,
 		to: version,
 	}
 );

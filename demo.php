@@ -25,48 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require 'vendor/autoload.php';
 
-if ( ! defined( 'PAY_CHECK_MATE_PLUGIN_VERSION' ) ) {
-    define( 'PAY_CHECK_MATE_PLUGIN_VERSION', '1.0.0' );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_ASSET' ) ) {
-    define( 'PAY_CHECK_MATE_ASSET', plugins_url( 'assets', __FILE__ ) );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_FILE' ) ) {
-    define( 'PAY_CHECK_MATE_FILE', __FILE__ );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_DIR' ) ) {
-    define( 'PAY_CHECK_MATE_DIR', __DIR__ );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_VERSION' ) ) {
-    define( 'PAY_CHECK_MATE_VERSION', '1.0.0' );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_BASE_NAME' ) ) {
-    define( 'PAY_CHECK_MATE_BASE_NAME', plugin_basename( __FILE__ ) );
-}
-
-if ( ! defined( 'PAY_CHECK_MATE_URL' ) ) {
-    define( 'PAY_CHECK_MATE_URL', plugins_url( '', __FILE__ ) );
+if ( ! defined( '[PLUGIN_NAME]_PLUGIN_VERSION' ) ) {
+    define( '[PLUGIN_NAME]_PLUGIN_VERSION', '1.0.0' );
 }
 
 /*
  * Main function to initialize the plugin.
  *
- * @since PAY_CHECK_MATE_SINCE
+ * @since [PLUGIN_NAME]_VERSION
  *
  * @return PayCheckMate
  */
-function pcm(): PayCheckMate {
+function plugin_name(): PayCheckMate {
     return PayCheckMate::get_instance();
 }
 
 /**
  * Run the plugin.
  *
- * @since PAY_CHECK_MATE_SINCE
+ * @since [PLUGIN_NAME]_VERSION
  */
-pcm();
+plugin_name();
