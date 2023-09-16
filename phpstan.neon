@@ -5,4 +5,4 @@ parameters:
 	excludePaths:
 		- tests
 	bootstrapFiles:
-	    - [demo].php
+	    - [DemoPlugin].php

@@ -1,15 +1,15 @@
 <?php
 
-namespace Demo\Hooks;
+namespace DemoPlugin\Hooks;
 
-use Demo\Contracts\HookAbleInterface;
+use DemoPlugin\Contracts\HookAbleInterface;
 
 class AdminMenu implements HookAbleInterface {
 
     /**
      * All the necessary hooks.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function hooks(): void {
@@ -25,7 +25,7 @@ class AdminMenu implements HookAbleInterface {
     /**
      * Add menu page.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @return void
      */
@@ -45,7 +45,7 @@ class AdminMenu implements HookAbleInterface {
     /**
      * Menu page callback.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @return void
      */
@@ -56,7 +56,7 @@ class AdminMenu implements HookAbleInterface {
     /**
      * Add plugin row meta. Upgrade to pro link.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, mixed> $plugin_meta
      * @param string               $plugin_file

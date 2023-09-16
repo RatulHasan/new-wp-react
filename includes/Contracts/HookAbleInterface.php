@@ -1,13 +1,13 @@
 <?php
 
-namespace Demo\Contracts;
+namespace DemoPlugin\Contracts;
 
 interface HookAbleInterface {
 
     /**
      * Call the necessary hooks.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function hooks(): void;

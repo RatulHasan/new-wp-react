@@ -1,10 +1,10 @@
 <?php
 
-namespace Demo\Models;
+namespace DemoPlugin\Models;
 
 use Exception;
-use Demo\Contracts\ModelInterface;
-use Demo\Requests\Request;
+use DemoPlugin\Contracts\ModelInterface;
+use DemoPlugin\Requests\Request;
 use WP_Error;
 
 /**
@@ -54,7 +54,7 @@ class Model implements ModelInterface {
     /**
      * Get all the items.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, mixed> $args
      *                                            - 'status'    => int,
@@ -186,7 +186,7 @@ class Model implements ModelInterface {
     /**
      * Get relational and where clause from get_relations() method.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<array<string, mixed>> $args
      *
@@ -277,7 +277,7 @@ class Model implements ModelInterface {
     /**
      * Get the total number of items.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, mixed> $args
      *
@@ -311,7 +311,7 @@ class Model implements ModelInterface {
     /**
      * Get the search query.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param string $search
      *
@@ -340,7 +340,7 @@ class Model implements ModelInterface {
     /**
      * Get the item from the database.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param int           $id
      * @param array<string> $args
@@ -398,7 +398,7 @@ class Model implements ModelInterface {
     /**
      * Get the items from the database by.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, string> $find_by
      * @param array<string>         $args
@@ -501,7 +501,7 @@ class Model implements ModelInterface {
     /**
      * Create a new item.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param Request $data
      *
@@ -535,7 +535,7 @@ class Model implements ModelInterface {
     /**
      * Update an item.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param int     $id
      * @param Request $data
@@ -573,7 +573,7 @@ class Model implements ModelInterface {
     /**
      * Update an item by.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, mixed> $find_by
      * @param array<string, mixed> $data
@@ -608,7 +608,7 @@ class Model implements ModelInterface {
     /**
      * Delete an item.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param int $id
      *
@@ -638,7 +638,7 @@ class Model implements ModelInterface {
     /**
      * Get the table name.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @throws Exception
      * @return string
@@ -659,7 +659,7 @@ class Model implements ModelInterface {
     /**
      * Get the table column names.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @throws Exception
      * @return array<string>
@@ -675,7 +675,7 @@ class Model implements ModelInterface {
     /**
      * Get the table's where format.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string> $data
      *
@@ -695,7 +695,7 @@ class Model implements ModelInterface {
     /**
      * Filter the data to only include the available columns.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string> $data
      *
@@ -718,7 +718,7 @@ class Model implements ModelInterface {
     /**
      * Process the data before returning it to the response.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<object> $data
      *
@@ -740,7 +740,7 @@ class Model implements ModelInterface {
     /**
      * Process the item before returning it to the response.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param object $item
      *
@@ -789,7 +789,7 @@ class Model implements ModelInterface {
     /**
      * Magic method to get the data. This will return the data if it exists.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param string $name
      *
@@ -806,7 +806,7 @@ class Model implements ModelInterface {
     /**
      * Magic method to set the data. This will set the data if it exists.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param string $name
      * @param mixed  $value

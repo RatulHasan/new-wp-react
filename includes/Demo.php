@@ -1,17 +1,17 @@
 <?php
 
-namespace Demo;
+namespace DemoPlugin;
 
-use Demo\Contracts\HookAbleApiInterface;
-use Demo\Contracts\HookAbleInterface;
+use DemoPlugin\Contracts\HookAbleApiInterface;
+use DemoPlugin\Contracts\HookAbleInterface;
 use ReflectionClass;
 
-final class Demo {
+final class DemoPlugin {
 
     /**
-     * @var Demo|null
+     * @var DemoPlugin|null
      */
-    protected static ?Demo $instance = null;
+    protected static ?DemoPlugin $instance = null;
 
     /**
      * All the hook classes.
@@ -19,8 +19,8 @@ final class Demo {
      * @var array|string[]
      */
     protected array $hook_classes = [
-        'Demo\Hooks\AdminMenu',
-        'Demo\Hooks\Assets',
+        'DemoPlugin\Hooks\AdminMenu',
+        'DemoPlugin\Hooks\Assets',
     ];
 
     /**
@@ -30,7 +30,7 @@ final class Demo {
      */
     protected array $classes = [
         'employee' => [
-            'class' => 'Demo\Classes\Employee',
+            'class' => 'DemoPlugin\Classes\Employee',
         ],
     ];
 
@@ -41,10 +41,10 @@ final class Demo {
      */
     protected array $model_classes = [
         'employee_model' => [
-            'class' => 'Demo\Models\EmployeeModel',
+            'class' => 'DemoPlugin\Models\EmployeeModel',
         ],
         'salary_history_model' => [
-            'class' => 'Demo\Models\SalaryHistoryModel',
+            'class' => 'DemoPlugin\Models\SalaryHistoryModel',
         ],
     ];
 
@@ -55,11 +55,11 @@ final class Demo {
      */
     protected array $request_classes = [
         'employee_request' => [
-            'class' => 'Demo\Requests\EmployeeRequest',
+            'class' => 'DemoPlugin\Requests\EmployeeRequest',
             'args'  => [],
         ],
         'salary_history_request' => [
-            'class' => 'Demo\Requests\SalaryHistoryRequest',
+            'class' => 'DemoPlugin\Requests\SalaryHistoryRequest',
             'args'  => [],
         ],
     ];
@@ -70,13 +70,13 @@ final class Demo {
      * @var array|string[]
      */
     protected array $api_classes = [
-        'Demo\REST\DepartmentApi',
-        'Demo\REST\DesignationApi',
-        'Demo\REST\SalaryHeadApi',
-        'Demo\REST\PayrollApi',
-        'Demo\REST\EmployeeApi',
-        'Demo\REST\PaySlipApi',
-        'Demo\REST\DashboardApi',
+        'DemoPlugin\REST\DepartmentApi',
+        'DemoPlugin\REST\DesignationApi',
+        'DemoPlugin\REST\SalaryHeadApi',
+        'DemoPlugin\REST\PayrollApi',
+        'DemoPlugin\REST\EmployeeApi',
+        'DemoPlugin\REST\PaySlipApi',
+        'DemoPlugin\REST\DashboardApi',
     ];
 
     /**
@@ -89,10 +89,10 @@ final class Demo {
     /**
      * Get the single instance of the class
      *
-     * @since PAY_CHECK_MATE_SINCE
-     * @return Demo
+     * @since PLUGIN_NAME_VERSION
+     * @return DemoPlugin
      */
-    public static function get_instance(): Demo {
+    public static function get_instance(): DemoPlugin {
         if ( null === self::$instance ) {
             self::$instance = new self();
         }
@@ -130,7 +130,7 @@ final class Demo {
     /**
      * Set Transaction Text Domain
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function set_translation(): void {
@@ -140,7 +140,7 @@ final class Demo {
     /**
      * On activate this plugin.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function activate_this_plugin(): void {
@@ -158,7 +158,7 @@ final class Demo {
     /**
      * Main point of loading the plugin.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @throws \ReflectionException
      *
@@ -182,7 +182,7 @@ final class Demo {
     /**
      * Load all the hook classes.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @return void
      */
@@ -202,7 +202,7 @@ final class Demo {
     /**
      * Load all the classes.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param array<string, mixed> $classes Classes to load.
      *
@@ -229,7 +229,7 @@ final class Demo {
     /**
      * Register REST API routes.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function register_rest_routes(): void {
@@ -248,7 +248,7 @@ final class Demo {
     /**
      * Load necessary hooks.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param HookAbleInterface $hook_able HookAble Interface.
      *

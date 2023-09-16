@@ -1,13 +1,13 @@
 <?php
 
-namespace Demo\Contracts;
+namespace DemoPlugin\Contracts;
 
 interface FormRequestInterface {
 
     /**
      * Validate the request.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @return mixed
      */

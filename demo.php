@@ -1,23 +1,23 @@
 <?php
 /**
- * Plugin Name:         [Demo]
- * Plugin URI:          [DemoURI]
- * Description:         [DemoDescription]
+ * Plugin Name:         [DemoPlugin]
+ * Plugin URI:          [DemoPluginURI]
+ * Description:         [DemoPluginDescription]
  * Version:             1.0.0
- * Requires PHP:        [DemoRequiresPHP]
- * Requires at least:   [DemoRequiresAtLeast]
- * Author:              [DemoAuthor]
- * Author URI:          [DemoAuthorURI]
- * License:             [DemoLicense]
- * License URI:         [DemoLicenseURI]
- * Text Domain:         [DemoTextDomain]
- * Domain Path:         [DemoDomainPath]
+ * Requires PHP:        [DemoPluginRequiresPHP]
+ * Requires at least:   [DemoPluginRequiresAtLeast]
+ * Author:              [DemoPluginAuthor]
+ * Author URI:          [DemoPluginAuthorURI]
+ * License:             [DemoPluginLicense]
+ * License URI:         [DemoPluginLicenseURI]
+ * Text Domain:         [DemoPluginTextDomain]
+ * Domain Path:         [DemoPluginDomainPath]
  *
  * @package WordPress
  */
 
 // To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
-use Demo\Demo;
+use DemoPlugin\DemoPlugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit();
@@ -25,24 +25,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require 'vendor/autoload.php';
 
-if ( ! defined( '[PLUGIN_NAME]_PLUGIN_VERSION' ) ) {
-    define( '[PLUGIN_NAME]_PLUGIN_VERSION', '1.0.0' );
+if ( ! defined( 'PLUGIN_NAME_PLUGIN_VERSION' ) ) {
+    define( 'PLUGIN_NAME_PLUGIN_VERSION', '1.0.0' );
 }
 
 /*
  * Main function to initialize the plugin.
  *
- * @since [PLUGIN_NAME]_VERSION
+ * @since PLUGIN_NAME_VERSION
  *
  * @return PayCheckMate
  */
-function plugin_name(): Demo {
-    return Demo::get_instance();
+function plugin_name(): DemoPlugin {
+    return DemoPlugin::get_instance();
 }
 
 /**
  * Run the plugin.
  *
- * @since [PLUGIN_NAME]_VERSION
+ * @since PLUGIN_NAME_VERSION
  */
 plugin_name();

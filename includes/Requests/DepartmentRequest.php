@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo\Requests;
+namespace DemoPlugin\Requests;
 
 class DepartmentRequest extends Request {
 

@@ -11,7 +11,7 @@ const { version } = JSON.parse( fs.readFileSync( 'package.json' ) );
 replace(
 	{
 		files: pluginFiles,
-		from: /[PLUGIN_NAME]_VERSION/g,
+		from: /PLUGIN_NAME_VERSION/g,
 		to: version,
 	}
 );

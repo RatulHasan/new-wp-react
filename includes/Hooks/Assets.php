@@ -1,9 +1,9 @@
 <?php
 
-namespace Demo\Hooks;
+namespace DemoPlugin\Hooks;
 
-use Demo\Classes\Employee;
-use Demo\Contracts\HookAbleInterface;
+use DemoPlugin\Classes\Employee;
+use DemoPlugin\Contracts\HookAbleInterface;
 
 class Assets implements HookAbleInterface {
 
@@ -16,7 +16,7 @@ class Assets implements HookAbleInterface {
     /**
      * Register scripts.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      * @return void
      */
     public function register_scripts(): void {
@@ -60,7 +60,7 @@ class Assets implements HookAbleInterface {
     /**
      * Register translations.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @throws \Exception
      * @return void

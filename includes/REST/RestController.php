@@ -1,6 +1,6 @@
 <?php
 
-namespace Demo\REST;
+namespace DemoPlugin\REST;
 
 use WP_REST_Controller;
 use WP_REST_Response;
@@ -11,7 +11,7 @@ class RestController extends WP_REST_Controller {
     /**
      * Prepare the item for the REST response.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param object                          $item    Default item object.
      *
@@ -47,7 +47,7 @@ class RestController extends WP_REST_Controller {
     /**
      * Prepare links for the request.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param object $item Item object.
      *
@@ -69,7 +69,7 @@ class RestController extends WP_REST_Controller {
     /**
      * Prepare a response for inserting into a collection of responses.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @param WP_REST_Response $response Response object.
      *
@@ -99,7 +99,7 @@ class RestController extends WP_REST_Controller {
     /**
      * Get the query params for collections.
      *
-     * @since PAY_CHECK_MATE_SINCE
+     * @since PLUGIN_NAME_VERSION
      *
      * @return array<string,array<string,string|bool|int>> Collection parameters.
      */
