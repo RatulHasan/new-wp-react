@@ -201,6 +201,8 @@ function processUserInputObject(pluginName) {
             updateVersionReplaceJs(pluginName);
             updateComposerJson(pluginName);
 
+            // Delete demo.php
+            fs.unlinkSync(oldFileName);
             rl.close();
         });
     });
