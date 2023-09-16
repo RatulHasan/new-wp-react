@@ -94,27 +94,53 @@ ${headerComment}
             if (writeErr) {
                 console.error('Error writing to file:', writeErr)
             } else {
-                console.log(
-                    `File "${oldFileName}" renamed to "${newFileName}"`)
+                console.log(`File "${oldFileName}" renamed to "${newFileName}"`)
                 // Delete the old file
-                fs.unlink(oldFileName, (deleteErr) => {
-                    if (deleteErr) {
-                        console.error('Error deleting file:', deleteErr)
-                    } else {
-                        console.log(`File "${oldFileName}" deleted`)
-                    }
-                })
+                // fs.unlink(oldFileName, (deleteErr) => {
+                //     if (deleteErr) {
+                //         console.error('Error deleting file:', deleteErr)
+                //     } else {
+                //         console.log(`File "${oldFileName}" deleted`)
+                //     }
+                // })
 
                 // Replace the plugin name in package.json
                 const packageJson = JSON.parse(fs.readFileSync('package.json'))
                 packageJson.name = pluginName.replace(/\s/g, '-').toLowerCase()
                 fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2))
+                console.log('package.json updated')
 
                 // Replace the plugin_name and [PLUGIN_NAME] in version-replace.js
                 const versionReplaceJs = fs.readFileSync('bin/version-replace.js', 'utf8')
                 const newVersionReplaceJs = versionReplaceJs.replace(/plugin_name/g, pluginName.replace(/\s/g, '_').toLowerCase())
                 const newVersionReplaceJs2 = newVersionReplaceJs.replace(/\[PLUGIN_NAME\]/g, pluginName.replace(/\s/g, '_').toUpperCase())
                 fs.writeFileSync('bin/version-replace.js', newVersionReplaceJs2)
+                console.log('version-replace.js updated')
+
+                // Replace the name, description, require>php in composer.json
+                const composerJson = JSON.parse(fs.readFileSync('composer.json'))
+                // Replace name with author name / plugin name in lowercase and spaces replaced with hyphens
+                composerJson.name = userInputObject['Author'].replace(/\s/g, '-').toLowerCase() + '/' + pluginName.replace(/\s/g, '-').toLowerCase()
+                composerJson.description = userInputObject['Description']
+                composerJson.require['php'] = `^${userInputObject['Requires PHP']}`
+                // Replace autoload>psr4 with the new plugin name and remove spaces
+                composerJson.autoload['psr-4'][`${pluginName.replace(/\s/g, '')}\\`] = 'includes/'
+                composerJson['autoload-dev']['psr-4'][`${pluginName.replace(/\s/g, '')}\\Tests\\`] = 'tests/phpunit/'
+                // Replace authors
+                composerJson.authors[0].name = userInputObject['Author']
+                composerJson.authors[0].homepage = userInputObject['Author URI']
+                fs.writeFileSync('composer.json', JSON.stringify(composerJson, null, 2))
+                console.log('composer.json updated')
+
+                // Now run composer install and dump-autoload
+                const { exec } = require('child_process')
+                exec('composer install && composer dump-autoload', (err, stdout, stderr) => {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log(stdout)
+                })
             }
 
             rl.close()

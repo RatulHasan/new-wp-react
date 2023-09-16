@@ -3,11 +3,12 @@ import './app.css';
 import './Store/Store';
 
 import {HashRouter} from "react-router-dom";
+import Main from "./Pages/Main";
 
 export default function App() {
     return (
         <HashRouter>
-            <h1>React App</h1>
+            <Main/>
         </HashRouter>
     )
 }
