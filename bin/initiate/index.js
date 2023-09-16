@@ -24,10 +24,20 @@ const userInputObject = {
 
 function promptUser() {
     const fields = Object.keys(userInputObject);
+    const validateField = (field, userInput) => {
+        if (!userInputObject[field] && !userInput) {
+            console.log('\x1b[31m%s\x1b[0m', `${field} is required`);
+            return false;
+        }
+        if (userInput) {
+            console.log('\x1b[32m%s\x1b[0m', '✓');
+            userInputObject[field] = userInput;
+        }
+        return true;
+    };
 
     function askField(index) {
         if (index >= fields.length) {
-            // Plugin name should be in PascalCase and remove end spaces
             const pluginName = userInputObject['Plugin Name'].replace(/\w\S*/g, (txt) => {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             }).replace(/\s+$/, '');
@@ -42,17 +52,11 @@ function promptUser() {
 
         const field = fields[index];
         rl.question(`Enter ${field} [${userInputObject[field]}]: `, (userInput) => {
-            if (!userInputObject[field] && !userInput) {
-                console.log('\x1b[31m%s\x1b[0m', `${field} is required`);
+            if (validateField(field, userInput)) {
+                askField(index + 1);
+            } else {
                 askField(index);
-                return;
             }
-
-            if (userInput) {
-                console.log('\x1b[32m%s\x1b[0m', '✓');
-                userInputObject[field] = userInput;
-            }
-            askField(index + 1);
         });
     }
 
@@ -124,7 +128,7 @@ function shouldIgnore(filePath) {
         'initiate'
     ];
     for (let i = 0; i < ignoreFolders.length; i++) {
-        if (filePath.indexOf(ignoreFolders[i]) !== -1) {
+        if (filePath.includes(ignoreFolders[i])) {
             return true;
         }
     }
@@ -144,13 +148,13 @@ function updateFiles(filePath, nameSpace) {
             const fileContent = fs.readFileSync(filePath, 'utf8');
             const updatedContent = fileContent.replace(/DemoPlugin/g, nameSpace);
 
-            const ALL_NEW = userInputObject['Plugin Name'].replace(/\s/g, '_').toUpperCase();
-            const updatedPluginName = updatedContent.replace(/ALL_NEW/g, ALL_NEW);
+            const PLUGIN_NAME = userInputObject['Plugin Name'].replace(/\s/g, '_').toUpperCase();
+            const updatedPluginName = updatedContent.replace(/PLUGIN_NAME/g, PLUGIN_NAME);
 
-            const all_new = userInputObject['Plugin Name'].replace(/\s/g, '-').toLowerCase();
-            const all_new2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
-            const updatedPlugin = updatedPluginName.replace(/plugin-name/g, all_new);
-            const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, all_new2);
+            const plugin_name = userInputObject['Plugin Name'].replace(/\s/g, '-').toLowerCase();
+            const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
+            const updatedPlugin = updatedPluginName.replace(/plugin-name/g, plugin_name);
+            const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, plugin_name2);
             fs.writeFileSync(filePath, updatedPlugin2, 'utf8');
 
             // If the file name is DemoPlugin.php, rename it to PluginName.php
