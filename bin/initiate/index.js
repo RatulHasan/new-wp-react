@@ -1,10 +1,11 @@
-const readline = require('readline')
-const fs = require('fs')
+const readline = require('readline');
+const fs = require('fs');
+const { exec } = require('child_process');
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-})
+});
 
 const userInputObject = {
     'Plugin Name': 'Demo',
@@ -19,43 +20,45 @@ const userInputObject = {
     'License URI': 'https://www.gnu.org/licenses/gpl-2.0.html',
     'Text Domain': 'DemoTextDomain',
     'Domain Path': '/languages',
-}
+};
 
-function promptUser () {
-    const fields = Object.keys(userInputObject)
+function promptUser() {
+    const fields = Object.keys(userInputObject);
 
-    function askField (index) {
+    function askField(index) {
         if (index >= fields.length) {
-            processUserInputObject()
-            return
+            processUserInputObject();
+            return;
         }
 
-        const field = fields[index]
-        rl.question(`Enter ${field} [${userInputObject[field]}]: `,
-            (userInput) => {
-                if (userInput) {
-                    userInputObject[field] = userInput
-                }
-                askField(index + 1)
-            })
+        const field = fields[index];
+        rl.question(`Enter ${field} [${userInputObject[field]}]: `, (userInput) => {
+            if (userInput) {
+                userInputObject[field] = userInput;
+            }
+            askField(index + 1);
+        });
     }
 
-    askField(0)
+    askField(0);
 }
 
-function processUserInputObject () {
-    const fields = Object.keys(userInputObject)
+function processUserInputObject() {
+    const pluginName = userInputObject['Plugin Name'];
+    const fields = Object.keys(userInputObject);
+
+    if (!pluginName) {
+        console.log('Plugin name is required');
+        rl.close();
+        return;
+    }
+
     const headerComment = fields.map((field) => {
-        if (field === 'Text Domain') {
-            // If the text domain is DemoTextDomain
-            if (userInputObject[field] === 'DemoTextDomain') {
-                // If yes, then replace it with the plugin name in lowercase
-                userInputObject[field] = userInputObject[fields[0]].replace(
-                    /\s/g, '-').toLowerCase()
-            }
+        if (field === 'Text Domain' && userInputObject[field] === 'DemoTextDomain') {
+            userInputObject[field] = userInputObject[fields[0]].replace(/\s/g, '-').toLowerCase();
         }
-        return ` * ${field}: ${userInputObject[field]}`
-    }).join('\n')
+        return ` * ${field}: ${userInputObject[field]}`;
+    }).join('\n');
 
     const headerCommentString = `/**
 ${headerComment}
@@ -63,23 +66,15 @@ ${headerComment}
  * @package WordPress
  */`;
 
-    const pluginName = userInputObject[fields[0]]
-
-    if (!pluginName) {
-        console.log('Plugin name is required')
-        rl.close()
-        return
-    }
-
-    const oldFileName = 'demo.php'
-    const newFileName = `${pluginName.replace(/\s/g, '-').toLowerCase()}.php`
+    const oldFileName = 'demo.php';
+    const newFileName = `${pluginName.replace(/\s/g, '-').toLowerCase()}.php`;
 
     // Read the existing PHP file
     fs.readFile(oldFileName, 'utf8', (err, data) => {
         if (err) {
-            console.error('Error reading file:', err)
-            rl.close()
-            return
+            console.error('Error reading file:', err);
+            rl.close();
+            return;
         }
 
         // Replace the existing header comment with the new one
@@ -92,23 +87,16 @@ ${headerComment}
         // Write the modified content back to the file
         fs.writeFile(newFileName, finalData, (writeErr) => {
             if (writeErr) {
-                console.error('Error writing to file:', writeErr)
+                console.error('Error writing to file:', writeErr);
             } else {
-                console.log(`File "${oldFileName}" renamed to "${newFileName}"`)
-                // Delete the old file
-                // fs.unlink(oldFileName, (deleteErr) => {
-                //     if (deleteErr) {
-                //         console.error('Error deleting file:', deleteErr)
-                //     } else {
-                //         console.log(`File "${oldFileName}" deleted`)
-                //     }
-                // })
+                console.log(`File "${oldFileName}" renamed to "${newFileName}"`);
 
-                // Replace the plugin name in package.json
-                const packageJson = JSON.parse(fs.readFileSync('package.json'))
-                packageJson.name = pluginName.replace(/\s/g, '-').toLowerCase()
-                fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2))
-                console.log('package.json updated')
+                // Update package.json
+                const packageJson = JSON.parse(fs.readFileSync('package.json'));
+                packageJson.name = pluginName.replace(/\s/g, '-').toLowerCase();
+                packageJson.homepage = userInputObject['Plugin URI'];
+                fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+                console.log('package.json updated');
 
                 // Replace the plugin_name and [PLUGIN_NAME] in version-replace.js
                 const versionReplaceJs = fs.readFileSync('bin/version-replace.js', 'utf8')
@@ -117,35 +105,32 @@ ${headerComment}
                 fs.writeFileSync('bin/version-replace.js', newVersionReplaceJs2)
                 console.log('version-replace.js updated')
 
-                // Replace the name, description, require>php in composer.json
-                const composerJson = JSON.parse(fs.readFileSync('composer.json'))
-                // Replace name with author name / plugin name in lowercase and spaces replaced with hyphens
-                composerJson.name = userInputObject['Author'].replace(/\s/g, '-').toLowerCase() + '/' + pluginName.replace(/\s/g, '-').toLowerCase()
-                composerJson.description = userInputObject['Description']
-                composerJson.require['php'] = `^${userInputObject['Requires PHP']}`
-                // Replace autoload>psr4 with the new plugin name and remove spaces
-                composerJson.autoload['psr-4'][`${pluginName.replace(/\s/g, '')}\\`] = 'includes/'
-                composerJson['autoload-dev']['psr-4'][`${pluginName.replace(/\s/g, '')}\\Tests\\`] = 'tests/phpunit/'
-                // Replace authors
-                composerJson.authors[0].name = userInputObject['Author']
-                composerJson.authors[0].homepage = userInputObject['Author URI']
-                fs.writeFileSync('composer.json', JSON.stringify(composerJson, null, 2))
-                console.log('composer.json updated')
+                // Update composer.json
+                const composerJson = JSON.parse(fs.readFileSync('composer.json'));
+                composerJson.name = `${userInputObject['Author'].replace(/\s/g, '-').toLowerCase()}/${pluginName.replace(/\s/g, '-').toLowerCase()}`;
+                composerJson.description = userInputObject['Description'];
+                composerJson.require.php = `>= ${userInputObject['Requires PHP']}`;
+                composerJson.autoload['psr-4'][`${pluginName.replace(/\s/g, '')}\\`] = 'includes/';
+                composerJson['autoload-dev']['psr-4'][`${pluginName.replace(/\s/g, '')}\\Tests\\`] = 'tests/phpunit/';
+                composerJson.authors[0].name = userInputObject['Author'];
+                composerJson.authors[0].homepage = userInputObject['Author URI'];
+                fs.writeFileSync('composer.json', JSON.stringify(composerJson, null, 2));
+                console.log('composer.json updated');
 
-                // Now run composer install and dump-autoload
-                const { exec } = require('child_process')
-                exec('composer install && composer dump-autoload', (err, stdout, stderr) => {
+                // Run composer install and dump-autoload
+                console.log('Running composer install and dump-autoload -o')
+                exec('composer install && composer dump-autoload -o', (err, stdout, stderr) => {
                     if (err) {
-                        console.error(err)
-                        return
+                        console.error(err);
+                        return;
                     }
-                    console.log(stdout)
-                })
+                    console.log(stdout);
+                });
             }
 
-            rl.close()
-        })
-    })
+            rl.close();
+        });
+    });
 }
 
-promptUser()
+promptUser();

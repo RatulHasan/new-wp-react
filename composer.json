@@ -1,6 +1,6 @@
 {
-    "name": "ratulhasan/pay-check-mate",
-    "description": "Pay Check Mate is a powerful and user-friendly payroll management solution that simplifies the payroll process for businesses of all sizes.",
+    "name": "ratul-hasan/demo-plugin",
+    "description": "",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
     "scripts": {

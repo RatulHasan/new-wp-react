@@ -1,9 +1,8 @@
 {
-  "name": "new-dokan",
+  "name": "demo",
   "version": "1.0.0",
-  "description": "Pay Check Mate is a powerful and user-friendly payroll management solution that simplifies the payroll process for businesses of all sizes. It provides a comprehensive set of features that enables users to manage payroll efficiently and accurately, saving time and minimizing errors.",
-  "homepage": "https://paycheckmate.com/",
-  "private": true,
+  "description": "",
+  "homepage": "",
   "main": "index.tsx",
   "author": "Ratul Hasan",
   "license": "GPL-3.0-or-later",
