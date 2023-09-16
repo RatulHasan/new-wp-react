@@ -10,7 +10,7 @@ const rl = readline.createInterface({
 const userInputObject = {
     'Plugin Name': '',
     'Plugin URI': 'https://www.ratulhasan.com/',
-    'Description': 'AllNew Description',
+    'Description': 'DemoPlugin Description',
     'Version': '1.0.0',
     'Requires PHP': '7.4',
     'Requires at least': '6.2',
@@ -18,7 +18,7 @@ const userInputObject = {
     'Author URI': 'https://www.ratulhasan.com/',
     'License': 'GPL-3.0-or-later',
     'License URI': 'https://www.gnu.org/licenses/gpl-2.0.html',
-    'Text Domain': 'AllNewTextDomain',
+    'Text Domain': 'DemoPluginTextDomain',
     'Domain Path': '/languages',
 };
 
@@ -75,8 +75,8 @@ function updateVersionReplaceJs(pluginName) {
     const versionReplaceJs = fs.readFileSync('bin/version-replace.js', 'utf8');
     const nameUpperCase = pluginName.replace(/\s/g, '_').toUpperCase();
     const nameLowerCase = pluginName.replace(/\s/g, '-').toLowerCase();
-    const newVersionReplaceJs = versionReplaceJs.replace(/all_new/g, nameLowerCase);
-    const newVersionReplaceJs2 = newVersionReplaceJs.replace(/\[ALL_NEW\]/g, nameUpperCase);
+    const newVersionReplaceJs = versionReplaceJs.replace(/plugin_name/g, nameLowerCase);
+    const newVersionReplaceJs2 = newVersionReplaceJs.replace(/PLUGIN_NAME/g, nameUpperCase);
     fs.writeFileSync('bin/version-replace.js', newVersionReplaceJs2);
     console.log('version-replace.js updated');
 }
@@ -95,8 +95,8 @@ function updateComposerJson(pluginName) {
     composerJson['autoload-dev']['psr-4'][nameSpaceDev] = 'tests/phpunit/';
 
     // Delete the old autoload and autoload-dev entries
-    delete composerJson['autoload']['psr-4']['AllNew\\'];
-    delete composerJson['autoload-dev']['psr-4']['AllNew\\Tests\\'];
+    delete composerJson['autoload']['psr-4']['DemoPlugin\\'];
+    delete composerJson['autoload-dev']['psr-4']['DemoPlugin\\Tests\\'];
 
     composerJson.authors[0].name = userInputObject['Author'];
     composerJson.authors[0].homepage = userInputObject['Author URI'];
@@ -131,6 +131,7 @@ function shouldIgnore(filePath) {
         'build',
         'dist',
         'assets',
+        'initiate'
     ];
     for (let i = 0; i < ignoreFolders.length; i++) {
         if (filePath.indexOf(ignoreFolders[i]) !== -1) {
@@ -151,19 +152,19 @@ function updateFiles(filePath, nameSpace) {
         }
         if (fs.statSync(filePath).isFile()) {
             const fileContent = fs.readFileSync(filePath, 'utf8');
-            const updatedContent = fileContent.replace(/AllNew/g, nameSpace);
+            const updatedContent = fileContent.replace(/DemoPlugin/g, nameSpace);
 
             const ALL_NEW = userInputObject['Plugin Name'].replace(/\s/g, '_').toUpperCase();
             const updatedPluginName = updatedContent.replace(/ALL_NEW/g, ALL_NEW);
 
             const all_new = userInputObject['Plugin Name'].replace(/\s/g, '-').toLowerCase();
             const all_new2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
-            const updatedPlugin = updatedPluginName.replace(/all-new/g, all_new);
-            const updatedPlugin2 = updatedPlugin.replace(/all_new/g, all_new2);
+            const updatedPlugin = updatedPluginName.replace(/plugin-name/g, all_new);
+            const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, all_new2);
             fs.writeFileSync(filePath, updatedPlugin2, 'utf8');
 
-            // If the file name is AllNew.php, rename it to PluginName.php
-            if (file === 'AllNew.php') {
+            // If the file name is DemoPlugin.php, rename it to PluginName.php
+            if (file === 'DemoPlugin.php') {
                 fs.renameSync(filePath, `${includesFolder}/${nameSpace}.php`);
             }
             console.log(`Updated ${filePath}`);
@@ -185,8 +186,8 @@ function processUserInputObject(pluginName) {
         const headerCommentString = generateHeaderCommentString(pluginName);
 
         const pluginInitials = data.replace(/\/\*\*[\s\S]*?\*\//, headerCommentString);
-        const nameUpperCase = pluginInitials.replace(/ALL_NEW/g, pluginName.replace(/\s/g, '_').toUpperCase())
-        const finalData = nameUpperCase.replace(/all_new/g, pluginName.replace(/\s/g, '_').toLowerCase())
+        const nameUpperCase = pluginInitials.replace(/PLUGIN_NAME/g, pluginName.replace(/\s/g, '_').toUpperCase())
+        const finalData = nameUpperCase.replace(/plugin_name/g, pluginName.replace(/\s/g, '_').toLowerCase())
 
         fs.writeFile(newFileName, finalData, (writeErr) => {
             if (writeErr) {
@@ -208,7 +209,7 @@ function processUserInputObject(pluginName) {
 function generateHeaderCommentString(pluginName) {
     const fields = Object.keys(userInputObject);
     const headerComment = fields.map((field) => {
-        if (field === 'Text Domain' && userInputObject[field] === 'AllNewTextDomain') {
+        if (field === 'Text Domain' && userInputObject[field] === 'DemoPluginTextDomain') {
             userInputObject[field] = userInputObject[fields[0]].replace(/\s/g, '-').toLowerCase();
         }
         if (field === 'Plugin Name') {
