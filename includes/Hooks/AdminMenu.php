@@ -13,7 +13,7 @@ class AdminMenu implements HookAbleInterface {
      * @return void
      */
     public function hooks(): void {
-        $capabilities = 'pay_check_mate_manage_menu';
+        $capabilities = 'plugin_name_manage_menu';
         if ( ! current_user_can( $capabilities ) ) {
             return;
         }
@@ -30,7 +30,7 @@ class AdminMenu implements HookAbleInterface {
      * @return void
      */
     public function admin_menu(): void {
-        $capabilities = 'pay_check_mate_manage_menu';
+        $capabilities = 'plugin_name_manage_menu';
         add_menu_page(
             __( 'PayCheckMate', 'pcm' ),
             __( 'PayCheckMate', 'pcm' ),

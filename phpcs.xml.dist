@@ -52,8 +52,8 @@
     <rule ref="WordPress.Security">
         <properties>
             <property name="custom_capabilities" type="array">
-                <element>pay_check_mate_accountant</element>
-                <element>pay_check_mate_manage_menu</element>
+                <element>plugin_name_accountant</element>
+                <element>plugin_name_manage_menu</element>
                 <!-- Add other custom capabilities if needed -->
             </property>
         </properties>

@@ -108,7 +108,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
      */
     public function get_items_permissions_check( $request ): bool {
         // phpcs:ignore
-        return current_user_can( 'pay_check_mate_accountant' ) || current_user_can( 'pay_check_mate_employee' );
+        return current_user_can( 'plugin_name_accountant' ) || current_user_can( 'plugin_name_employee' );
     }
 
     /**
@@ -122,7 +122,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
      */
     public function create_item_permissions_check( $request ): bool {
         // phpcs:ignore
-        return current_user_can( 'pay_check_mate_accountant' );
+        return current_user_can( 'plugin_name_accountant' );
     }
 
     /**
@@ -136,7 +136,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
      */
     public function get_item_permissions_check( $request ): bool {
         // phpcs:ignore
-        return current_user_can( 'pay_check_mate_accountant' );
+        return current_user_can( 'plugin_name_accountant' );
     }
 
     /**
@@ -150,7 +150,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
      */
     public function update_item_permissions_check( $request ): bool {
         // phpcs:ignore
-        return current_user_can( 'pay_check_mate_accountant' );
+        return current_user_can( 'plugin_name_accountant' );
     }
 
     /**
@@ -164,7 +164,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
      */
     public function delete_item_permissions_check( $request ): bool {
         // phpcs:ignore
-        return current_user_can( 'pay_check_mate_accountant' );
+        return current_user_can( 'plugin_name_accountant' );
     }
 
     /**

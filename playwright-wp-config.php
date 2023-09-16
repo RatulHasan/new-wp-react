@@ -62,7 +62,7 @@ define( 'NONCE_SALT', '`my8@GrL_0v#.cNVOfu4:+D5G$2qQ;;!G )tbB~RU^?vuH,UrupK!vrt8
  * Only numbers, letters, and underscores please! */
 // phpcs:ignore
 $table_prefix = 'wptests_';
-define( 'SITE_URL', 'http://pay-check-mate.test' );
+define( 'SITE_URL', 'http://plugin-name.test' );
 define( 'SITE_TITLE', 'Play WordPress Wright' );
 define( 'ADMIN_USERNAME', 'admin' );
 define( 'ADMIN_PASSWORD', 'admin' );

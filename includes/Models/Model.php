@@ -12,8 +12,8 @@ use WP_Error;
  */
 class Model implements ModelInterface {
 
-    protected static string $table_prefix = 'pay_check_mate_';
-    protected string $cache_group = 'pay_check_mate_';
+    protected static string $table_prefix = 'plugin_name_';
+    protected string $cache_group = 'plugin_name_';
 
     public function __construct() {
         $this->cache_group = $this->cache_group . static::$table;

@@ -21,7 +21,7 @@ if (!isProduction) {
             writeToDisk: true,
         },
         allowedHosts: 'all',
-        host: 'pay-check-mate.test',
+        host: 'plugin-name.test',
         port: 8887,
         proxy: {
             '/build': {

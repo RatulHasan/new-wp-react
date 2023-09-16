@@ -144,11 +144,11 @@ final class DemoPlugin {
      * @return void
      */
     public function activate_this_plugin(): void {
-        if ( ! get_option( 'pay_check_mate_installed' ) ) {
-            update_option( 'pay_check_mate_installed', time() );
+        if ( ! get_option( 'plugin_name_installed' ) ) {
+            update_option( 'plugin_name_installed', time() );
         }
 
-        update_option( 'pay_check_mate_version', PAY_CHECK_MATE_PLUGIN_VERSION );
+        update_option( 'plugin_name_version', PAY_CHECK_MATE_PLUGIN_VERSION );
 
         new Installer();
 
@@ -166,7 +166,7 @@ final class DemoPlugin {
      */
     public function load_plugin_hooks(): void {
         // Check option that all tables are created for this version.
-        $tables_created = get_option( 'pay_check_mate_tables_created', false );
+        $tables_created = get_option( 'plugin_name_tables_created', false );
         if ( ! $tables_created || version_compare( $tables_created, PAY_CHECK_MATE_PLUGIN_VERSION, '<' ) ) {
             new Installer();
         }
@@ -176,7 +176,7 @@ final class DemoPlugin {
         $this->load_classes( $this->model_classes );
         $this->load_classes( $this->request_classes );
 
-        do_action( 'pay_check_mate_loaded' );
+        do_action( 'plugin_name_loaded' );
     }
 
     /**

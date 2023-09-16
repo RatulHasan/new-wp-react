@@ -28,17 +28,17 @@ type NavigationType = {
 }
 export default function Main() {
     let navigations: NavigationType[] = [
-        {key: 'dashboard', title: __('Dashboard', 'pcm'), href: '/', icon: HomeIcon, current: false, roles: ['pay_check_mate_accountant'], component: Dashboard},
-        {key: 'settings', title: __('Settings', 'pcm'), href: 'settings', icon: CogIcon, current: false, roles: ['pay_check_mate_accountant'],
+        {key: 'dashboard', title: __('Dashboard', 'pcm'), href: '/', icon: HomeIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+        {key: 'settings', title: __('Settings', 'pcm'), href: 'settings', icon: CogIcon, current: false, roles: ['plugin_name_accountant'],
             children: [
-                {key: 'general', title: __('General', 'pcm'), href: 'settings/general', icon: CogIcon, current: false, roles: ['pay_check_mate_accountant'], component: Dashboard},
+                {key: 'general', title: __('General', 'pcm'), href: 'settings/general', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
             ]
         },
     ] as NavigationType[];
 
     navigations = applyFilters('pcm.sidebar_navigations', navigations);
     let paths = [
-        {key: 'general/:id', title: __('General', 'pcm'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['pay_check_mate_accountant'], component: Dashboard},
+        {key: 'general/:id', title: __('General', 'pcm'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
     ];
     paths = applyFilters('pcm.routes', paths);
 

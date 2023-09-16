@@ -4,7 +4,7 @@ namespace DemoPlugin\Requests;
 
 class DepartmentRequest extends Request {
 
-    protected static string $nonce = 'pay_check_mate_nonce';
+    protected static string $nonce = 'plugin_name_nonce';
 
     protected static array $fillable = [ 'name' ];
 
