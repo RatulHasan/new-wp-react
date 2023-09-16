@@ -104,16 +104,6 @@ function updateComposerJson(pluginName) {
     fs.writeFileSync('composer.json', JSON.stringify(composerJson, null, 2));
     console.log('composer.json updated');
 
-    // Run composer install and dump-autoload
-    console.log('Running composer install and dump-autoload -o');
-    exec('composer install && composer dump-autoload -o', (err, stdout, stderr) => {
-        if (err) {
-            console.error(err);
-            return;
-        }
-        console.log(stdout);
-    });
-
     // Get root folder name
     const rootFolder = __dirname.replace(/bin\/initiate/g, '');
     // nameSpace without \\ at the end
@@ -203,6 +193,25 @@ function processUserInputObject(pluginName) {
 
             // Delete demo.php
             fs.unlinkSync(oldFileName);
+            // Run composer install and dump-autoload
+            console.log('Running composer install and dump-autoload -o');
+            exec('composer install && composer dump-autoload -o', (err, stdout, stderr) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log(stdout);
+            });
+
+            // Run npm install
+            console.log('Running npm install');
+            exec('npm install', (err, stdout, stderr) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log(stdout);
+            });
             rl.close();
         });
     });
