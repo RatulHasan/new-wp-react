@@ -45,6 +45,8 @@
     "archiver": "^5.3.1",
     "autoprefixer": "^10.4.14",
     "clean-css": "^5.3.2",
+    "glob": "^10.3.4",
+    "ignore": "^5.2.4",
     "postcss": "^8.4.23",
     "replace-in-file": "^6.3.5",
     "tailwindcss": "^3.3.2",
