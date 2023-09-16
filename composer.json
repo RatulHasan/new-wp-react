@@ -31,11 +31,11 @@
     },
     "autoload": {
         "psr-4": {
-            "PayCheckMate\\": "includes/"
+            "Demo\\": "includes/"
         }
     },
     "autoload-dev": {
-        "psr-4": { "PayCheckMate\\Tests\\": "tests/phpunit/" }
+        "psr-4": { "Demo\\Tests\\": "tests/phpunit/" }
     },
     "config": {
         "allow-plugins": {
