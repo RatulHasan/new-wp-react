@@ -152,10 +152,15 @@ function updateFiles(filePath, nameSpace) {
             const updatedPluginName = updatedContent.replace(/PLUGIN_NAME/g, PLUGIN_NAME);
 
             const plugin_name = userInputObject['Plugin Name'].replace(/\s/g, '-').toLowerCase();
-            const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
             const updatedPlugin = updatedPluginName.replace(/plugin-name/g, plugin_name);
+
+            const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
             const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, plugin_name2);
-            fs.writeFileSync(filePath, updatedPlugin2, 'utf8');
+
+            // Make camelCase
+            const updatedPlugin3 = updatedPlugin2.replace(/pluginName/g, nameSpace);
+
+            fs.writeFileSync(filePath, updatedPlugin3, 'utf8');
 
             // If the file name is DemoPlugin.php, rename it to PluginName.php
             if (file === 'DemoPlugin.php') {
@@ -168,6 +173,12 @@ function updateFiles(filePath, nameSpace) {
 
 function processUserInputObject(pluginName) {
     const oldFileName = 'demo.php';
+    if (!fs.existsSync(oldFileName)) {
+        // Add red color
+        console.log('\x1b[31m%s\x1b[0m', `File "${oldFileName}" not found, maybe you already ran this script?`);
+        rl.close();
+        return;
+    }
     const newFileName = `${pluginName.replace(/\s/g, '-').toLowerCase()}.php`;
 
     fs.readFile(oldFileName, 'utf8', (err, data) => {

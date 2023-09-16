@@ -28,6 +28,17 @@ require 'vendor/autoload.php';
 if ( ! defined( 'PLUGIN_NAME_PLUGIN_VERSION' ) ) {
     define( 'PLUGIN_NAME_PLUGIN_VERSION', '1.0.0' );
 }
+if ( ! defined( 'PLUGIN_NAME_FILE' ) ) {
+    define( 'PLUGIN_NAME_FILE', __FILE__ );
+}
+
+if ( ! defined( 'PLUGIN_NAME_DIR' ) ) {
+    define( 'PLUGIN_NAME_DIR', __DIR__ );
+}
+
+if ( ! defined( 'PLUGIN_NAME_URL' ) ) {
+    define( 'PLUGIN_NAME_URL', plugins_url( '', __FILE__ ) );
+}
 
 /*
  * Main function to initialize the plugin.

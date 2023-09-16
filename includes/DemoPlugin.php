@@ -28,41 +28,21 @@ final class DemoPlugin {
      *
      * @var array<string, mixed>
      */
-    protected array $classes = [
-        'employee' => [
-            'class' => 'DemoPlugin\Classes\Employee',
-        ],
-    ];
+    protected array $classes = [];
 
     /**
      * All the model classes.
      *
      * @var array<string, mixed>
      */
-    protected array $model_classes = [
-        'employee_model' => [
-            'class' => 'DemoPlugin\Models\EmployeeModel',
-        ],
-        'salary_history_model' => [
-            'class' => 'DemoPlugin\Models\SalaryHistoryModel',
-        ],
-    ];
+    protected array $model_classes = [];
 
     /**
      * All the request classes.
      *
      * @var array<string, mixed>
      */
-    protected array $request_classes = [
-        'employee_request' => [
-            'class' => 'DemoPlugin\Requests\EmployeeRequest',
-            'args'  => [],
-        ],
-        'salary_history_request' => [
-            'class' => 'DemoPlugin\Requests\SalaryHistoryRequest',
-            'args'  => [],
-        ],
-    ];
+    protected array $request_classes = [];
 
     /**
      * All the API classes.
@@ -71,12 +51,6 @@ final class DemoPlugin {
      */
     protected array $api_classes = [
         'DemoPlugin\REST\DepartmentApi',
-        'DemoPlugin\REST\DesignationApi',
-        'DemoPlugin\REST\SalaryHeadApi',
-        'DemoPlugin\REST\PayrollApi',
-        'DemoPlugin\REST\EmployeeApi',
-        'DemoPlugin\REST\PaySlipApi',
-        'DemoPlugin\REST\DashboardApi',
     ];
 
     /**
@@ -105,7 +79,7 @@ final class DemoPlugin {
      */
     private function __construct() {
         add_action( 'init', [ $this, 'set_translation' ] );
-        register_activation_hook( PAY_CHECK_MATE_FILE, [ $this, 'activate_this_plugin' ] );
+        register_activation_hook( PLUGIN_NAME_FILE, [ $this, 'activate_this_plugin' ] );
         add_action( 'plugins_loaded', [ $this, 'load_plugin_hooks' ] );
 
         // Register REST API routes.
@@ -134,7 +108,7 @@ final class DemoPlugin {
      * @return void
      */
     public function set_translation(): void {
-        load_plugin_textdomain( 'plugin-name', false, dirname( plugin_basename( PAY_CHECK_MATE_FILE ) ) . '/languages' );
+        load_plugin_textdomain( 'plugin-name', false, dirname( plugin_basename( PLUGIN_NAME_FILE ) ) . '/languages' );
     }
 
     /**
@@ -148,9 +122,7 @@ final class DemoPlugin {
             update_option( 'plugin_name_installed', time() );
         }
 
-        update_option( 'plugin_name_version', PAY_CHECK_MATE_PLUGIN_VERSION );
-
-        new Installer();
+        update_option( 'plugin_name_version', PLUGIN_NAME_PLUGIN_VERSION );
 
         flush_rewrite_rules();
     }
@@ -165,12 +137,6 @@ final class DemoPlugin {
      * @return void
      */
     public function load_plugin_hooks(): void {
-        // Check option that all tables are created for this version.
-        $tables_created = get_option( 'plugin_name_tables_created', false );
-        if ( ! $tables_created || version_compare( $tables_created, PAY_CHECK_MATE_PLUGIN_VERSION, '<' ) ) {
-            new Installer();
-        }
-
         $this->load_hook_classes();
         $this->load_classes( $this->classes );
         $this->load_classes( $this->model_classes );
