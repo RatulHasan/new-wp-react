@@ -1,6 +1,6 @@
 <?php
 
-namespace PayCheckMate\Models;
+namespace Demo\Models;
 
 class DepartmentModel extends Model {
 

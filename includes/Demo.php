@@ -1,18 +1,17 @@
 <?php
 
-namespace PayCheckMate;
+namespace Demo;
 
-use PayCheckMate\Classes\Installer;
-use PayCheckMate\Contracts\HookAbleApiInterface;
-use PayCheckMate\Contracts\HookAbleInterface;
+use Demo\Contracts\HookAbleApiInterface;
+use Demo\Contracts\HookAbleInterface;
 use ReflectionClass;
 
-final class PayCheckMate {
+final class Demo {
 
     /**
-     * @var PayCheckMate|null
+     * @var Demo|null
      */
-    protected static ?PayCheckMate $instance = null;
+    protected static ?Demo $instance = null;
 
     /**
      * All the hook classes.
@@ -20,9 +19,8 @@ final class PayCheckMate {
      * @var array|string[]
      */
     protected array $hook_classes = [
-        'PayCheckMate\Hooks\AdminMenu',
-        'PayCheckMate\Hooks\Assets',
-        'PayCheckMate\Hooks\User',
+        'Demo\Hooks\AdminMenu',
+        'Demo\Hooks\Assets',
     ];
 
     /**
@@ -32,7 +30,7 @@ final class PayCheckMate {
      */
     protected array $classes = [
         'employee' => [
-            'class' => 'PayCheckMate\Classes\Employee',
+            'class' => 'Demo\Classes\Employee',
         ],
     ];
 
@@ -43,10 +41,10 @@ final class PayCheckMate {
      */
     protected array $model_classes = [
         'employee_model' => [
-            'class' => 'PayCheckMate\Models\EmployeeModel',
+            'class' => 'Demo\Models\EmployeeModel',
         ],
         'salary_history_model' => [
-            'class' => 'PayCheckMate\Models\SalaryHistoryModel',
+            'class' => 'Demo\Models\SalaryHistoryModel',
         ],
     ];
 
@@ -57,11 +55,11 @@ final class PayCheckMate {
      */
     protected array $request_classes = [
         'employee_request' => [
-            'class' => 'PayCheckMate\Requests\EmployeeRequest',
+            'class' => 'Demo\Requests\EmployeeRequest',
             'args'  => [],
         ],
         'salary_history_request' => [
-            'class' => 'PayCheckMate\Requests\SalaryHistoryRequest',
+            'class' => 'Demo\Requests\SalaryHistoryRequest',
             'args'  => [],
         ],
     ];
@@ -72,13 +70,13 @@ final class PayCheckMate {
      * @var array|string[]
      */
     protected array $api_classes = [
-        'PayCheckMate\REST\DepartmentApi',
-        'PayCheckMate\REST\DesignationApi',
-        'PayCheckMate\REST\SalaryHeadApi',
-        'PayCheckMate\REST\PayrollApi',
-        'PayCheckMate\REST\EmployeeApi',
-        'PayCheckMate\REST\PaySlipApi',
-        'PayCheckMate\REST\DashboardApi',
+        'Demo\REST\DepartmentApi',
+        'Demo\REST\DesignationApi',
+        'Demo\REST\SalaryHeadApi',
+        'Demo\REST\PayrollApi',
+        'Demo\REST\EmployeeApi',
+        'Demo\REST\PaySlipApi',
+        'Demo\REST\DashboardApi',
     ];
 
     /**
@@ -92,9 +90,9 @@ final class PayCheckMate {
      * Get the single instance of the class
      *
      * @since PAY_CHECK_MATE_SINCE
-     * @return PayCheckMate
+     * @return Demo
      */
-    public static function get_instance(): PayCheckMate {
+    public static function get_instance(): Demo {
         if ( null === self::$instance ) {
             self::$instance = new self();
         }

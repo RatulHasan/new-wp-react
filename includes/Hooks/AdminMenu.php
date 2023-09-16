@@ -1,8 +1,8 @@
 <?php
 
-namespace PayCheckMate\Hooks;
+namespace Demo\Hooks;
 
-use PayCheckMate\Contracts\HookAbleInterface;
+use Demo\Contracts\HookAbleInterface;
 
 class AdminMenu implements HookAbleInterface {
 

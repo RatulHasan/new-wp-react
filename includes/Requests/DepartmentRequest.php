@@ -1,6 +1,6 @@
 <?php
 
-namespace PayCheckMate\Requests;
+namespace Demo\Requests;
 
 class DepartmentRequest extends Request {
 

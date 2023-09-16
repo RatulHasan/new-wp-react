@@ -1,9 +1,9 @@
 <?php
 
-namespace PayCheckMate\Requests;
+namespace Demo\Requests;
 
 use Exception;
-use PayCheckMate\Contracts\FormRequestInterface;
+use Demo\Contracts\FormRequestInterface;
 
 class Request implements FormRequestInterface {
 

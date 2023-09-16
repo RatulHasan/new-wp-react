@@ -1,6 +1,6 @@
 <?php
 
-namespace PayCheckMate\Contracts;
+namespace Demo\Contracts;
 
 interface FormRequestInterface {
 

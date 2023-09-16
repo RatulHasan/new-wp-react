@@ -17,7 +17,7 @@
  */
 
 // To prevent direct access, if not define WordPress ABSOLUTE PATH then exit.
-use PayCheckMate\PayCheckMate;
+use Demo\Demo;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit();
@@ -36,8 +36,8 @@ if ( ! defined( '[PLUGIN_NAME]_PLUGIN_VERSION' ) ) {
  *
  * @return PayCheckMate
  */
-function plugin_name(): PayCheckMate {
-    return PayCheckMate::get_instance();
+function plugin_name(): Demo {
+    return Demo::get_instance();
 }
 
 /**

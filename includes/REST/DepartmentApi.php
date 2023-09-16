@@ -1,15 +1,15 @@
 <?php
 
-namespace PayCheckMate\REST;
+namespace Demo\REST;
 
-use PayCheckMate\REST\RestController;
+use Demo\REST\RestController;
 use WP_Error;
 use Exception;
 use WP_REST_Request;
 use WP_REST_Response;
-use PayCheckMate\Requests\DepartmentRequest;
-use PayCheckMate\Contracts\HookAbleApiInterface;
-use PayCheckMate\Models\DepartmentModel;
+use Demo\Requests\DepartmentRequest;
+use Demo\Contracts\HookAbleApiInterface;
+use Demo\Models\DepartmentModel;
 
 class DepartmentApi extends RestController implements HookAbleApiInterface {
 

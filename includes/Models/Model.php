@@ -1,10 +1,10 @@
 <?php
 
-namespace PayCheckMate\Models;
+namespace Demo\Models;
 
 use Exception;
-use PayCheckMate\Contracts\ModelInterface;
-use PayCheckMate\Requests\Request;
+use Demo\Contracts\ModelInterface;
+use Demo\Requests\Request;
 use WP_Error;
 
 /**

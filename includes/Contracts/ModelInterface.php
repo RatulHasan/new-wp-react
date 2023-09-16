@@ -1,8 +1,8 @@
 <?php
 
-namespace PayCheckMate\Contracts;
+namespace Demo\Contracts;
 
-use PayCheckMate\Requests\Request;
+use Demo\Requests\Request;
 
 interface ModelInterface {
 

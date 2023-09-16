@@ -1,9 +1,9 @@
 <?php
 
-namespace PayCheckMate\Hooks;
+namespace Demo\Hooks;
 
-use PayCheckMate\Classes\Employee;
-use PayCheckMate\Contracts\HookAbleInterface;
+use Demo\Classes\Employee;
+use Demo\Contracts\HookAbleInterface;
 
 class Assets implements HookAbleInterface {
 
