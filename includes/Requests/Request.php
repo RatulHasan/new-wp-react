@@ -120,10 +120,10 @@ class Request implements FormRequestInterface {
      */
     public function validate() {
         if ( ! isset( $this->data['_wpnonce'] ) || ! wp_verify_nonce( $this->data['_wpnonce'], $this->get_nonce() ) ) {
-            $this->addError( 'nonce', __( 'Nonce verification failed', 'pcm' ) );
+            $this->addError( 'nonce', __( 'Nonce verification failed', 'plugin-name' ) );
 
-            wp_die( __( 'Nonce verification failed', 'pcm' ) );
-			// throw new Exception( __( 'Nonce verification failed', 'pcm' ) );
+            wp_die( __( 'Nonce verification failed', 'plugin-name' ) );
+			// throw new Exception( __( 'Nonce verification failed', 'plugin-name' ) );
         }
 
         $this->validate_fillable();
@@ -142,12 +142,12 @@ class Request implements FormRequestInterface {
         if ( ! empty( $fillable ) ) {
             foreach ( $fillable as $item ) {
                 if ( ! array_key_exists( $item, $this->data ) ) {
-                    $this->addError( $item, $item . __( ' key is required for this form request.', 'pcm' ) );
+                    $this->addError( $item, $item . __( ' key is required for this form request.', 'plugin-name' ) );
                 }
 
                 // Check if this key value is empty.
                 if ( '' === $this->data[ $item ] && empty( $this->data[ $item ] ) ) {
-                    $this->addError( $item, $item . __( ' key can not be empty.', 'pcm' ) );
+                    $this->addError( $item, $item . __( ' key can not be empty.', 'plugin-name' ) );
                 }
             }
         }
@@ -213,7 +213,7 @@ class Request implements FormRequestInterface {
      */
     public static function get_nonce(): string {
         if ( empty( static::$nonce ) ) {
-            throw new Exception( __( 'Nonce is not defined for this form request.', 'pcm' ) );
+            throw new Exception( __( 'Nonce is not defined for this form request.', 'plugin-name' ) );
         }
 
         return static::$nonce;
@@ -230,7 +230,7 @@ class Request implements FormRequestInterface {
      */
     public static function get_rules(): array {
         if ( empty( static::$rules ) ) {
-            throw new Exception( __( 'Make sure you have defined rules for this form request.', 'pcm' ) );
+            throw new Exception( __( 'Make sure you have defined rules for this form request.', 'plugin-name' ) );
         }
 
         return static::$rules;
@@ -247,7 +247,7 @@ class Request implements FormRequestInterface {
      */
     public static function get_fillable(): array {
         if ( empty( static::$fillable ) ) {
-            throw new Exception( __( 'Fillable are not defined for this form request.', 'pcm' ) );
+            throw new Exception( __( 'Fillable are not defined for this form request.', 'plugin-name' ) );
         }
 
         return static::$fillable;

@@ -11,12 +11,12 @@ import {Card} from "../Components/Card";
 import {NotFound} from "../Components/404";
 import {addAction} from "../Helpers/Hooks";
 
-addAction('pcm_notification', 'pcm_notification', (message: string, type: string = 'success') => {
+addAction('plugin-name_notification', 'plugin-name_notification', (message: string, type: string = 'success') => {
     // @ts-ignore
     toast[type](message);
 });
 
-type NavigationType = {
+export type NavigationType = {
     key: string,
     title: string,
     href: string,
@@ -28,19 +28,19 @@ type NavigationType = {
 }
 export default function Main() {
     let navigations: NavigationType[] = [
-        {key: 'dashboard', title: __('Dashboard', 'pcm'), href: '/', icon: HomeIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
-        {key: 'settings', title: __('Settings', 'pcm'), href: 'settings', icon: CogIcon, current: false, roles: ['plugin_name_accountant'],
+        {key: 'dashboard', title: __('Dashboard', 'plugin-name'), href: '/', icon: HomeIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+        {key: 'settings', title: __('Settings', 'plugin-name'), href: 'settings', icon: CogIcon, current: false, roles: ['plugin_name_accountant'],
             children: [
-                {key: 'general', title: __('General', 'pcm'), href: 'settings/general', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+                {key: 'general', title: __('General', 'plugin-name'), href: 'settings/general', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
             ]
         },
     ] as NavigationType[];
 
-    navigations = applyFilters('pcm.sidebar_navigations', navigations);
+    navigations = applyFilters('plugin-name.sidebar_navigations', navigations);
     let paths = [
-        {key: 'general/:id', title: __('General', 'pcm'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+        {key: 'general/:id', title: __('General', 'plugin-name'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
     ];
-    paths = applyFilters('pcm.routes', paths);
+    paths = applyFilters('plugin-name.routes', paths);
 
     return (
         <>

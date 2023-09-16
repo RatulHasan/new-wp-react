@@ -157,7 +157,6 @@ function updateFiles(filePath, nameSpace) {
             const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
             const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, plugin_name2);
 
-            // Make camelCase
             const updatedPlugin3 = updatedPlugin2.replace(/pluginName/g, nameSpace);
 
             fs.writeFileSync(filePath, updatedPlugin3, 'utf8');
@@ -228,6 +227,16 @@ function processUserInputObject(pluginName) {
                 console.log(stdout);
             });
             rl.close();
+
+            // Build the plugin
+            console.log('Building the plugin');
+            exec('npm run build', (err, stdout, stderr) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log(stdout);
+            })
         });
     });
 }

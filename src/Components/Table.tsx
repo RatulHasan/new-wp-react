@@ -4,13 +4,9 @@ import {EmptyState} from "./EmptyState";
 import {Card} from "./Card";
 import {ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, ArrowUpIcon} from "@heroicons/react/24/outline";
 import {FormInput} from "./FormInput";
-import {filtersType} from "../Store/Store";
-import {SelectBox} from "./SelectBox";
-import {SelectBoxType} from "../Types/SalaryHeadType";
+import {SelectBox, SelectBoxType} from "./SelectBox";
 import {__} from "@wordpress/i18n";
-import {UserCapNames} from "../Types/UserType";
 import {PermissionDenied} from "./404";
-import {userCan} from "../Helpers/User";
 import {debounce} from "lodash";
 import {applyFilters} from "../Helpers/Hooks";
 import {Button} from "./Button";
@@ -24,12 +20,19 @@ type Column = {
     sortable?: boolean;
 };
 
+export interface filtersType {
+    per_page: string | number,
+    page?: number,
+    search?: string | number,
+    order_by?: string,
+    order?: string,
+    status?: string,
+}
 type TableProps = {
     columns: Column[];
     data: any[];
     total: number;
     filters: filtersType;
-    permissions: UserCapNames
     isLoading?: boolean;
     totalPage?: number;
     per_page?: string | number;
@@ -39,16 +42,7 @@ type TableProps = {
     searchPlaceholder?: string;
 };
 
-export const Table = ({columns, data, filters, permissions, total, isLoading = true, totalPage = 1, per_page = 10, currentPage = 1, onFilterChange = () => void 0, search = false, searchPlaceholder = "Search by name..."}: TableProps) => {
-    if (!userCan(UserCapNames[permissions])) {
-        return (
-            <>
-                <Card>
-                    <PermissionDenied />
-                </Card>
-            </>
-        )
-    }
+export const Table = ({columns, data, filters, total, isLoading = true, totalPage = 1, per_page = 10, currentPage = 1, onFilterChange = () => void 0, search = false, searchPlaceholder = "Search by name..."}: TableProps) => {
     per_page = parseInt(String(per_page));
 
     const hasIdColumn = columns.some((column) => column.dataIndex === "#");
@@ -152,7 +146,7 @@ export const Table = ({columns, data, filters, permissions, total, isLoading = t
         });
     }, 1000), []);
 
-    const color = applyFilters('pcm.pagination_button_color', 'gray');
+    const color = applyFilters('plugin-name.pagination_button_color', 'gray');
     return (
         <>
             {isLoading ? (
@@ -255,7 +249,7 @@ export const Table = ({columns, data, filters, permissions, total, isLoading = t
                         className={`px-4 py-1 mr-6 text-sm text-white focus:outline-none ` + (currentPage === 1 ? `cursor-not-allowed bg-${color}-500` : "")}
                     >
                         <ArrowLeftIcon className="w-4 h-4" />
-                        {__("Previous", "pcm")}
+                        {__("Previous", "plugin-name")}
                     </Button>
                     {/*<span className="px-1 py-1 text-sm font-medium text-gray-900">*/}
                     {/*    Page {currentPage} of {totalPages}*/}
@@ -263,7 +257,7 @@ export const Table = ({columns, data, filters, permissions, total, isLoading = t
                     {totalPages > 1 && (
                         <>
                         <span className="px-1 py-1 text-sm font-medium text-gray-900">
-                        {__("Go to page", 'pcm')}
+                        {__("Go to page", 'plugin-name')}
                         </span>
                         <FormInput
                             type="number"
@@ -285,7 +279,7 @@ export const Table = ({columns, data, filters, permissions, total, isLoading = t
                     </span>
                     <span className="mx-2 text-gray-600">|</span>
                     <span className="px-1 py-1 text-sm font-medium text-gray-900">
-                        {__("Showing per page", "pcm")}
+                        {__("Showing per page", "plugin-name")}
                     </span>
                     <span className="px-1 py-1 text-sm font-medium text-gray-900">
                         <SelectBox
@@ -301,7 +295,7 @@ export const Table = ({columns, data, filters, permissions, total, isLoading = t
                         disabled={currentPage === parseInt(String(totalPages))}
                         className={`px-4 py-1 ml-6 text-sm text-white focus:outline-none ` + (currentPage === parseInt(String(totalPages)) ? `cursor-not-allowed bg-${color}-500` : "")}
                     >
-                    {__("Next", "pcm")}
+                    {__("Next", "plugin-name")}
                         <ArrowRightIcon className="w-4 h-4" />
                     </Button>
                 </nav>
