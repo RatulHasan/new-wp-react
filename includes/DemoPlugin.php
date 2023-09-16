@@ -134,7 +134,7 @@ final class DemoPlugin {
      * @return void
      */
     public function set_translation(): void {
-        load_plugin_textdomain( 'pay-check-mate', false, dirname( plugin_basename( PAY_CHECK_MATE_FILE ) ) . '/languages' );
+        load_plugin_textdomain( 'plugin-name', false, dirname( plugin_basename( PAY_CHECK_MATE_FILE ) ) . '/languages' );
     }
 
     /**

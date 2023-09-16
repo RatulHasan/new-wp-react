@@ -25,7 +25,7 @@ class Assets implements HookAbleInterface {
         $src_js     = PAY_CHECK_MATE_URL . '/assets/index.js';
         $src_css    = PAY_CHECK_MATE_URL . '/assets/index.css';
         wp_register_script(
-            'pay-check-mate-js',
+            'plugin-name-js',
             $src_js,
             $asset_file['dependencies'],
             $asset_file['version'],
@@ -33,7 +33,7 @@ class Assets implements HookAbleInterface {
         );
 
         wp_register_style(
-            'pay-check-mate-css',
+            'plugin-name-css',
             $src_css,
             [],
             $asset_file['version'],
@@ -48,13 +48,13 @@ class Assets implements HookAbleInterface {
      * @return void
      */
     public function enqueue_scripts(): void {
-        if ( 'toplevel_page_pay-check-mate' !== get_current_screen()->id ) {
+        if ( 'toplevel_page_plugin-name' !== get_current_screen()->id ) {
             return;
         }
 
         $this->register_localize_script();
-        wp_enqueue_script( 'pay-check-mate-js' );
-        wp_enqueue_style( 'pay-check-mate-css' );
+        wp_enqueue_script( 'plugin-name-js' );
+        wp_enqueue_style( 'plugin-name-css' );
     }
 
     /**
@@ -75,7 +75,7 @@ class Assets implements HookAbleInterface {
         // @phpstan-ignore-next-line
         $user->employee = $employee->get_employee();
         wp_localize_script(
-            'pay-check-mate-js', 'payCheckMate', [
+            'plugin-name-js', 'payCheckMate', [
 				'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
 				'pay_check_mate_nonce' => wp_create_nonce( 'pay_check_mate_nonce' ),
 				'currentUser'          => $user,

@@ -14,7 +14,7 @@ use DemoPlugin\Models\DepartmentModel;
 class DepartmentApi extends RestController implements HookAbleApiInterface {
 
     public function __construct() {
-        $this->namespace = 'pay-check-mate/v1';
+        $this->namespace = 'plugin-name/v1';
         $this->rest_base = 'departments';
     }
 

@@ -32,7 +32,7 @@ require_once "{$_tests_dir}/includes/functions.php";
  */
 function _manually_load_plugin() {
     //    _manually_load_required_plugins();
-    require dirname( dirname( dirname( __FILE__ ) ) ) . '/pay-check-mate.php';
+    require dirname( dirname( dirname( __FILE__ ) ) ) . '/plugin-name.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

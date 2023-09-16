@@ -35,7 +35,7 @@ class AdminMenu implements HookAbleInterface {
             __( 'PayCheckMate', 'pcm' ),
             __( 'PayCheckMate', 'pcm' ),
             $capabilities,
-            'pay-check-mate',
+            'plugin-name',
             [ $this, 'menu_page' ],
             'dashicons-money-alt',
             20
@@ -64,7 +64,7 @@ class AdminMenu implements HookAbleInterface {
      * @return mixed
      */
     public function add_plugin_row_meta( array $plugin_meta, string $plugin_file ) {
-        if ( 'pay-check-mate/pay-check-mate.php' !== $plugin_file ) {
+        if ( 'plugin-name/plugin-name.php' !== $plugin_file ) {
             return $plugin_meta;
         }
 
