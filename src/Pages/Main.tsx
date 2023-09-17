@@ -10,9 +10,7 @@ import {applyFilters} from "../Helpers/Hooks";
 import {Card} from "../Components/Card";
 import {NotFound} from "../Components/404";
 import {addAction} from "../Helpers/Hooks";
-import {Button} from "../Components/Button";
-import {CloseButton} from "../Components/CloseButton";
-import {EmptyState} from "../Components/EmptyState";
+import {AllComponents} from "./AllComponents";
 
 addAction('plugin-name_notification', 'plugin-name_notification', (message: string, type: string = 'success') => {
     // @ts-ignore
@@ -33,11 +31,7 @@ export default function Main() {
         {key: 'dashboard', title: __('Dashboard', 'plugin-name'), href: '/', icon: HomeIcon, current: false, component: Dashboard},
         {key: 'components', title: __('Components', 'plugin-name'), href: 'components', icon: CogIcon, current: false,
             children: [
-                {key: '404', title: __('404', 'plugin-name'), href: 'components/404', icon: CogIcon, current: false, component: NotFound},
-                {key: 'button', title: __('Button', 'plugin-name'), href: 'components/button', icon: CogIcon, current: false, component: Button},
-                {key: 'card', title: __('Card', 'plugin-name'), href: 'components/card', icon: CogIcon, current: false, component: Card},
-                {key: 'close-button', title: __('Close Button', 'plugin-name'), href: 'components/close-button', icon: CogIcon, current: false, component: CloseButton},
-                {key: 'empty-state', title: __('Empty State', 'plugin-name'), href: 'components/empty-state', icon: CogIcon, current: false, component: EmptyState},
+                {key: 'all', title: __('All Components', 'test-wp-plugin'), href: 'components', icon: CogIcon, current: false, component: AllComponents},
             ]
         },
     ] as NavigationType[];
