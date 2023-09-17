@@ -24,14 +24,14 @@ class AdminMenu implements HookAbleInterface {
      * @return void
      */
     public function admin_menu(): void {
-        $capabilities = 'plugin_name_manage_menu';
+        $capabilities = 'manage_options';
         add_menu_page(
             __( 'DemoPlugin', 'plugin-name' ),
             __( 'DemoPlugin', 'plugin-name' ),
             $capabilities,
             'plugin-name',
             [ $this, 'menu_page' ],
-            'dashicons-money-alt',
+            'dashicons-admin-generic',
             20
         );
     }
