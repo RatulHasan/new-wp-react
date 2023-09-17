@@ -10,6 +10,9 @@ import {applyFilters} from "../Helpers/Hooks";
 import {Card} from "../Components/Card";
 import {NotFound} from "../Components/404";
 import {addAction} from "../Helpers/Hooks";
+import {Button} from "../Components/Button";
+import {CloseButton} from "../Components/CloseButton";
+import {EmptyState} from "../Components/EmptyState";
 
 addAction('plugin-name_notification', 'plugin-name_notification', (message: string, type: string = 'success') => {
     // @ts-ignore
@@ -22,23 +25,26 @@ export type NavigationType = {
     href: string,
     icon: any,
     current: boolean,
-    roles: string[],
     children?: NavigationType[],
     component?: any
 }
 export default function Main() {
     let navigations: NavigationType[] = [
-        {key: 'dashboard', title: __('Dashboard', 'plugin-name'), href: '/', icon: HomeIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
-        {key: 'settings', title: __('Settings', 'plugin-name'), href: 'settings', icon: CogIcon, current: false, roles: ['plugin_name_accountant'],
+        {key: 'dashboard', title: __('Dashboard', 'plugin-name'), href: '/', icon: HomeIcon, current: false, component: Dashboard},
+        {key: 'components', title: __('Components', 'plugin-name'), href: 'components', icon: CogIcon, current: false,
             children: [
-                {key: 'general', title: __('General', 'plugin-name'), href: 'settings/general', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+                {key: '404', title: __('404', 'plugin-name'), href: 'components/404', icon: CogIcon, current: false, component: NotFound},
+                {key: 'button', title: __('Button', 'plugin-name'), href: 'components/button', icon: CogIcon, current: false, component: Button},
+                {key: 'card', title: __('Card', 'plugin-name'), href: 'components/card', icon: CogIcon, current: false, component: Card},
+                {key: 'close-button', title: __('Close Button', 'plugin-name'), href: 'components/close-button', icon: CogIcon, current: false, component: CloseButton},
+                {key: 'empty-state', title: __('Empty State', 'plugin-name'), href: 'components/empty-state', icon: CogIcon, current: false, component: EmptyState},
             ]
         },
     ] as NavigationType[];
 
     navigations = applyFilters('plugin-name.sidebar_navigations', navigations);
     let paths = [
-        {key: 'general/:id', title: __('General', 'plugin-name'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+        {key: 'general/:id', title: __('General', 'plugin-name'), href: 'settings/general/:id', icon: CogIcon, current: false, component: Dashboard},
     ];
     paths = applyFilters('plugin-name.routes', paths);
 
