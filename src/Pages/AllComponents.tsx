@@ -142,10 +142,8 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Spinner', 'plugin-name')}
             </h1>
-            <Card>
-                <div className='bg-black'>
-                    <Spinner />
-                </div>
+            <Card className='overflow-hidden bg-black shadow sm:rounded-lg py-8 px-8'>
+                <Spinner />
             </Card>
 
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
