@@ -7,6 +7,8 @@ A fresh WordPress plugin template
 3. Run `npm install` to install all dependencies
 4. Run `npm run new-wp` and follow the instructions to replace all instances of `plugin-template` with your plugin name
 
+Video tutorial: [Click here](https://www.youtube.com/watch?v=4ULxW7nqyKU)
+
 ## Development
 See package.json for available scripts
 
