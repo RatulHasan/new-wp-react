@@ -71,6 +71,7 @@ function updatePackageJson(pluginName) {
     packageJson.description = userInputObject['Description'];
     packageJson.author = userInputObject['Author'];
     packageJson.license = userInputObject['License'];
+    delete packageJson.scripts['new-wp'];
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
     console.log('package.json updated');
 }
@@ -220,8 +221,6 @@ function processUserInputObject(pluginName) {
             // Build the plugin. This will also close the readline interface.
             buildPlugin();
 
-            const packageJson = JSON.parse(fs.readFileSync('package.json'));
-            delete packageJson.scripts['new-wp'];
             // After finishing everything, delete bin/initiate folder.
             fs.rmdirSync('bin/initiate', { recursive: true });
         });
