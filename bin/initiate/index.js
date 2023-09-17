@@ -217,18 +217,8 @@ function processUserInputObject(pluginName) {
                 console.log(stdout);
             });
 
-            // Run npm install
-            console.log('Running npm install');
-            exec('npm install', (err, stdout, stderr) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log(stdout);
-
-                // Build the plugin after npm installation
-                buildPlugin();
-            });
+            // Build the plugin. This will also close the readline interface.
+            buildPlugin();
         });
     });
 }
