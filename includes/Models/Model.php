@@ -320,7 +320,7 @@ class Model implements ModelInterface {
      */
     public function get_search_query( string $search ) {
         if ( empty( static::$search_by ) ) {
-            return new WP_Error( 'search_by_not_defined', __( 'To search, you need to define the search_by property in the model.', 'pcm' ) );
+            return new WP_Error( 'search_by_not_defined', __( 'To search, you need to define the search_by property in the model.', 'plugin-name' ) );
         }
 
         global $wpdb;
@@ -410,7 +410,7 @@ class Model implements ModelInterface {
     public function find_by( array $find_by, array $args, array $fields = [ '*' ] ): array {
         global $wpdb;
         if ( empty( $find_by ) ) {
-            throw new \Exception( __( 'Arguments cannot be empty', 'pcm' ) );
+            throw new \Exception( __( 'Arguments cannot be empty', 'plugin-name' ) );
         }
 
         $args = wp_parse_args(
@@ -523,7 +523,7 @@ class Model implements ModelInterface {
         $last_id = $wpdb->insert_id;
 
         if ( ! $last_id ) {
-            return new WP_Error( 'db_insert_error', __( 'Could not insert row into the database table.', 'pcm' ) );
+            return new WP_Error( 'db_insert_error', __( 'Could not insert row into the database table.', 'plugin-name' ) );
         }
 
         // Clear cache.
@@ -567,7 +567,7 @@ class Model implements ModelInterface {
             return $this->find( $id );
         }
 
-        return new WP_Error( 'db_update_error', __( 'Could not update row into the database table.', 'pcm' ) );
+        return new WP_Error( 'db_update_error', __( 'Could not update row into the database table.', 'plugin-name' ) );
     }
 
     /**
@@ -602,7 +602,7 @@ class Model implements ModelInterface {
             return $this->find_by( $find_by, [] )[0];
         }
 
-        return new WP_Error( 'db_update_error', __( 'Could not update row into the database table.', 'pcm' ) );
+        return new WP_Error( 'db_update_error', __( 'Could not update row into the database table.', 'plugin-name' ) );
     }
 
     /**

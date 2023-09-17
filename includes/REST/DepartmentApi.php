@@ -53,7 +53,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
 					'permission_callback' => [ $this, 'get_item_permissions_check' ],
 					'args'                => [
 						'id' => [
-							'description' => __( 'Unique identifier for the object.', 'pcm' ),
+							'description' => __( 'Unique identifier for the object.', 'plugin-name' ),
 							'type'        => 'integer',
 							'required'    => true,
 						],
@@ -65,17 +65,17 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
 					'permission_callback' => [ $this, 'update_item_permissions_check' ],
 					'args'                => [
 						'id'              => [
-							'description' => __( 'Unique identifier for the object.', 'pcm' ),
+							'description' => __( 'Unique identifier for the object.', 'plugin-name' ),
 							'type'        => 'integer',
 							'required'    => true,
 						],
 						'name' => [
-							'description' => __( 'Department name.', 'pcm' ),
+							'description' => __( 'Department name.', 'plugin-name' ),
 							'type'        => 'string',
 							'required'    => true,
 						],
 						'status'          => [
-							'description' => __( 'Department status.', 'pcm' ),
+							'description' => __( 'Department status.', 'plugin-name' ),
 							'type'        => 'integer',
 						],
 					],
@@ -86,7 +86,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
 					'permission_callback' => [ $this, 'delete_item_permissions_check' ],
 					'args'                => [
 						'id' => [
-							'description' => __( 'Unique identifier for the object.', 'pcm' ),
+							'description' => __( 'Unique identifier for the object.', 'plugin-name' ),
 							'type'        => 'integer',
 							'required'    => true,
 						],
@@ -223,13 +223,13 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
         $department     = new DepartmentModel();
         $validated_data = new DepartmentRequest( $request->get_params() );
         if ( ! empty( $validated_data->error ) ) {
-            return new WP_Error( 500, __( 'Invalid data.', 'pcm' ), [ $validated_data->error ] );
+            return new WP_Error( 500, __( 'Invalid data.', 'plugin-name' ), [ $validated_data->error ] );
         }
 
         $department = $department->create( $validated_data );
 
         if ( is_wp_error( $department ) ) {
-            return new WP_Error( 500, __( 'Could not create department.', 'pcm' ) );
+            return new WP_Error( 500, __( 'Could not create department.', 'plugin-name' ) );
         }
 
         $department = $this->prepare_item_for_response( $department, $request );
@@ -284,7 +284,7 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
         $department     = new DepartmentModel();
         $validated_data = new DepartmentRequest( $request->get_params() );
         if ( ! empty( $validated_data->error ) ) {
-            return new WP_Error( 500, __( 'Invalid data.', 'pcm' ), [ $validated_data->error ] );
+            return new WP_Error( 500, __( 'Invalid data.', 'plugin-name' ), [ $validated_data->error ] );
         }
 
         $updated = $department->update( $request->get_param( 'id' ), $validated_data );
@@ -315,11 +315,11 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
         try {
             $department = $department->delete( $request->get_param( 'id' ) );
         } catch ( Exception $e ) {
-            return new WP_Error( 500, __( 'Could not delete designation.', 'pcm' ) );
+            return new WP_Error( 500, __( 'Could not delete designation.', 'plugin-name' ) );
         }
 
         if ( ! $department ) {
-            return new WP_Error( 500, __( 'Could not delete designation.', 'pcm' ) );
+            return new WP_Error( 500, __( 'Could not delete designation.', 'plugin-name' ) );
         }
 
         return new WP_REST_Response( $department, 200 );
@@ -339,28 +339,28 @@ class DepartmentApi extends RestController implements HookAbleApiInterface {
             'type'       => 'object',
             'properties' => [
                 'id'              => [
-                    'description' => __( 'Unique identifier for the object', 'pcm' ),
+                    'description' => __( 'Unique identifier for the object', 'plugin-name' ),
                     'type'        => 'integer',
                     'context'     => [ 'view', 'edit', 'embed' ],
                     'readonly'    => true,
                 ],
                 'name' => [
-                    'description' => __( 'Department name', 'pcm' ),
+                    'description' => __( 'Department name', 'plugin-name' ),
                     'type'        => 'string',
                     'required'    => true,
                 ],
                 'status'          => [
-                    'description' => __( 'Status', 'pcm' ),
+                    'description' => __( 'Status', 'plugin-name' ),
                     'type'        => 'integer',
                     'context'     => [ 'view', 'edit', 'embed' ],
                 ],
                 'created_on'      => [
-                    'description' => __( 'Created on', 'pcm' ),
+                    'description' => __( 'Created on', 'plugin-name' ),
                     'type'        => 'string',
                     'context'     => [ 'view', 'edit', 'embed' ],
                 ],
                 'updated_at'      => [
-                    'description' => __( 'Updated on', 'pcm' ),
+                    'description' => __( 'Updated on', 'plugin-name' ),
                     'type'        => 'string',
                     'context'     => [ 'view', 'edit', 'embed' ],
                 ],

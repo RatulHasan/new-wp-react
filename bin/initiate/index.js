@@ -71,6 +71,7 @@ function updatePackageJson(pluginName) {
     packageJson.description = userInputObject['Description'];
     packageJson.author = userInputObject['Author'];
     packageJson.license = userInputObject['License'];
+    delete packageJson.scripts['new-wp'];
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
     console.log('package.json updated');
 }
@@ -152,10 +153,14 @@ function updateFiles(filePath, nameSpace) {
             const updatedPluginName = updatedContent.replace(/PLUGIN_NAME/g, PLUGIN_NAME);
 
             const plugin_name = userInputObject['Plugin Name'].replace(/\s/g, '-').toLowerCase();
-            const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
             const updatedPlugin = updatedPluginName.replace(/plugin-name/g, plugin_name);
+
+            const plugin_name2 = userInputObject['Plugin Name'].replace(/\s/g, '_').toLowerCase();
             const updatedPlugin2 = updatedPlugin.replace(/plugin_name/g, plugin_name2);
-            fs.writeFileSync(filePath, updatedPlugin2, 'utf8');
+
+            const updatedPlugin3 = updatedPlugin2.replace(/pluginName/g, nameSpace);
+
+            fs.writeFileSync(filePath, updatedPlugin3, 'utf8');
 
             // If the file name is DemoPlugin.php, rename it to PluginName.php
             if (file === 'DemoPlugin.php') {
@@ -168,6 +173,12 @@ function updateFiles(filePath, nameSpace) {
 
 function processUserInputObject(pluginName) {
     const oldFileName = 'demo.php';
+    if (!fs.existsSync(oldFileName)) {
+        // Add red color
+        console.log('\x1b[31m%s\x1b[0m', `File "${oldFileName}" not found, maybe you already ran this script?`);
+        rl.close();
+        return;
+    }
     const newFileName = `${pluginName.replace(/\s/g, '-').toLowerCase()}.php`;
 
     fs.readFile(oldFileName, 'utf8', (err, data) => {
@@ -187,7 +198,7 @@ function processUserInputObject(pluginName) {
             if (writeErr) {
                 console.error('Error writing to file:', writeErr);
             } else {
-                console.log(`File "${oldFileName}" renamed to "${newFileName}"`);
+                console.log('\x1b[32m%s\x1b[0m', `File "${oldFileName}" renamed to "${newFileName}"`);
             }
 
             // Update other files
@@ -198,7 +209,7 @@ function processUserInputObject(pluginName) {
             // Delete demo.php
             fs.unlinkSync(oldFileName);
             // Run composer install and dump-autoload
-            console.log('Running composer install and dump-autoload -o');
+            console.log('\x1b[32m%s\x1b[0m', 'Running composer install and dump-autoload -o...');
             exec('composer install && composer dump-autoload -o', (err, stdout, stderr) => {
                 if (err) {
                     console.error(err);
@@ -207,17 +218,30 @@ function processUserInputObject(pluginName) {
                 console.log(stdout);
             });
 
-            // Run npm install
-            console.log('Running npm install');
-            exec('npm install', (err, stdout, stderr) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log(stdout);
-            });
-            rl.close();
+            // Build the plugin. This will also close the readline interface.
+            buildPlugin();
+
+            // After finishing everything, delete bin/initiate folder.
+            fs.rmdirSync('bin/initiate', { recursive: true });
         });
+    });
+}
+
+function buildPlugin() {
+    console.log('\x1b[32m%s\x1b[0m', 'Building the plugin...');
+    // Remove assets folder
+    if (fs.existsSync('assets')) {
+        fs.rmdirSync('assets', { recursive: true });
+    }
+    exec('npm run build', (buildErr, buildStdout, buildStderr) => {
+        if (buildErr) {
+            console.error(buildErr);
+            return;
+        }
+        console.log(buildStdout);
+
+        // Close the readline interface after build
+        rl.close();
     });
 }
 

@@ -20,10 +20,10 @@ class Assets implements HookAbleInterface {
      * @return void
      */
     public function register_scripts(): void {
-        $file       = PAY_CHECK_MATE_DIR . '/assets/index.asset.php';
+        $file       = PLUGIN_NAME_DIR . '/assets/index.asset.php';
         $asset_file = require_once $file;
-        $src_js     = PAY_CHECK_MATE_URL . '/assets/index.js';
-        $src_css    = PAY_CHECK_MATE_URL . '/assets/index.css';
+        $src_js     = PLUGIN_NAME_URL . '/assets/index.js';
+        $src_css    = PLUGIN_NAME_URL . '/assets/index.css';
         wp_register_script(
             'plugin-name-js',
             $src_js,
@@ -66,19 +66,10 @@ class Assets implements HookAbleInterface {
      * @return void
      */
     public function register_localize_script(): void {
-        $user     = wp_get_current_user();
-        $employee = new Employee();
-
-        $employee = $employee->get_employee_by_user_id( $user->ID );
-
-        unset( $employee->user_pass );
-        // @phpstan-ignore-next-line
-        $user->employee = $employee->get_employee();
         wp_localize_script(
-            'plugin-name-js', 'payCheckMate', [
+            'plugin-name-js', 'pluginName', [
 				'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
 				'plugin_name_nonce' => wp_create_nonce( 'plugin_name_nonce' ),
-				'currentUser'          => $user,
 			],
         );
     }

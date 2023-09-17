@@ -1,8 +1,21 @@
 import { useState, useEffect } from "@wordpress/element";
 import { Link, useLocation } from "react-router-dom";
-import { NavbarLinkProps } from "../Types/NavigationType";
-import { userIs } from "../Helpers/User";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+export interface NavigationType {
+    key: string;
+    title: string;
+    href: string;
+    icon: any;
+    roles: string[];
+    current?: boolean;
+    children?: NavigationType[];
+    component?: any;
+}
+
+export interface NavbarLinkProps {
+    navigation: NavigationType[];
+}
 
 // @ts-ignore
 function classNames(...classes) {
@@ -47,7 +60,7 @@ export const NavbarLink = ({ navigation }: NavbarLinkProps) => {
         <>
             {navigation.map((item, index) => (
                 <li key={item.title}>
-                    {userIs(item.roles) && (
+                    {(
                         <>
                             {item.children ? (
                                 <>

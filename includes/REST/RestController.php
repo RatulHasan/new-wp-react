@@ -106,14 +106,14 @@ class RestController extends WP_REST_Controller {
     public function get_collection_params(): array {
         return [
             'search'   => [
-                'description'       => __( 'Limit results to those matching a string.', 'pcm' ),
+                'description'       => __( 'Limit results to those matching a string.', 'plugin-name' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_text_field',
                 'validate_callback' => 'rest_validate_request_arg',
                 'default'           => '',
             ],
             'page'     => [
-                'description'       => __( 'Current page of the collection.', 'pcm' ),
+                'description'       => __( 'Current page of the collection.', 'plugin-name' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'absint',
                 'validate_callback' => 'rest_validate_request_arg',
@@ -122,7 +122,7 @@ class RestController extends WP_REST_Controller {
                 'maximum'           => PHP_INT_MAX,
             ],
             'per_page' => [
-                'description'       => __( 'Maximum number of items to be returned in result set.', 'pcm' ),
+                'description'       => __( 'Maximum number of items to be returned in result set.', 'plugin-name' ),
                 'type'              => 'integer',
                 'sanitize_callback' => 'sanitize_text_field',
                 'validate_callback' => 'rest_validate_request_arg',
@@ -131,21 +131,21 @@ class RestController extends WP_REST_Controller {
                 'maximum'           => 100,
             ],
             'order_by'  => [
-                'description'       => __( 'Sort collection by object attribute.', 'pcm' ),
+                'description'       => __( 'Sort collection by object attribute.', 'plugin-name' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_key',
                 'validate_callback' => 'rest_validate_request_arg',
                 'default'           => 'id',
             ],
             'order'    => [
-                'description'       => __( 'Order sort attribute ascending or descending.', 'pcm' ),
+                'description'       => __( 'Order sort attribute ascending or descending.', 'plugin-name' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'sanitize_key',
                 'validate_callback' => 'rest_validate_request_arg',
                 'default'           => 'desc',
             ],
             'status'   => [
-                'description'       => __( 'Limit result set to items with a specific status.', 'pcm' ),
+                'description'       => __( 'Limit result set to items with a specific status.', 'plugin-name' ),
                 'type'              => 'string',
                 'sanitize_callback' => 'absint',
                 'validate_callback' => 'rest_validate_request_arg',

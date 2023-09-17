@@ -10,37 +10,35 @@ import {applyFilters} from "../Helpers/Hooks";
 import {Card} from "../Components/Card";
 import {NotFound} from "../Components/404";
 import {addAction} from "../Helpers/Hooks";
+import {AllComponents} from "./AllComponents";
 
-addAction('pcm_notification', 'pcm_notification', (message: string, type: string = 'success') => {
+addAction('plugin-name_notification', 'plugin-name_notification', (message: string, type: string = 'success') => {
     // @ts-ignore
     toast[type](message);
 });
 
-type NavigationType = {
+export type NavigationType = {
     key: string,
     title: string,
     href: string,
     icon: any,
     current: boolean,
-    roles: string[],
     children?: NavigationType[],
     component?: any
 }
 export default function Main() {
     let navigations: NavigationType[] = [
-        {key: 'dashboard', title: __('Dashboard', 'pcm'), href: '/', icon: HomeIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
-        {key: 'settings', title: __('Settings', 'pcm'), href: 'settings', icon: CogIcon, current: false, roles: ['plugin_name_accountant'],
+        {key: 'dashboard', title: __('Dashboard', 'plugin-name'), href: '/', icon: HomeIcon, current: false, component: Dashboard},
+        {key: 'components', title: __('Components', 'plugin-name'), href: 'components', icon: CogIcon, current: false,
             children: [
-                {key: 'general', title: __('General', 'pcm'), href: 'settings/general', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+                {key: 'all', title: __('All Components', 'test-wp-plugin'), href: 'components', icon: CogIcon, current: false, component: AllComponents},
             ]
         },
     ] as NavigationType[];
 
-    navigations = applyFilters('pcm.sidebar_navigations', navigations);
     let paths = [
-        {key: 'general/:id', title: __('General', 'pcm'), href: 'settings/general/:id', icon: CogIcon, current: false, roles: ['plugin_name_accountant'], component: Dashboard},
+        {key: 'general/:id', title: __('General', 'plugin-name'), href: 'settings/general/:id', icon: CogIcon, current: false, component: Dashboard},
     ];
-    paths = applyFilters('pcm.routes', paths);
 
     return (
         <>
