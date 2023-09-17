@@ -219,6 +219,11 @@ function processUserInputObject(pluginName) {
 
             // Build the plugin. This will also close the readline interface.
             buildPlugin();
+
+            // After finishing everything, delete bin/initiate folder.
+            fs.rmdirSync('bin/initiate', { recursive: true });
+            const packageJson = JSON.parse(fs.readFileSync('package.json'));
+            delete packageJson.scripts['new-wp'];
         });
     });
 }
