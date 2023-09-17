@@ -42,7 +42,7 @@ export const AllComponents = () => {
             render: (row: any) => {
                 return (
                     <div className="flex items-center justify-center">
-                        <Button onClick={()=> alert('Edit Button clicked')}>
+                        <Button onClick={() => alert('Edit Button clicked')}>
                             {__('Edit', 'plugin-name')}
                         </Button>
                     </div>
@@ -72,7 +72,7 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Button', 'plugin-name')}
             </h1>
-            <Button onClick={()=> alert('Button clicked')}>
+            <Button onClick={() => alert('Button clicked')}>
                 {__('Button', 'plugin-name')}
             </Button>
 
@@ -99,7 +99,7 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Close Button', 'plugin-name')}
             </h1>
-            <CloseButton onClick={()=> alert('Close Button clicked')}/>
+            <CloseButton onClick={() => alert('Close Button clicked')} />
 
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Empty State', 'plugin-name')}
@@ -110,11 +110,43 @@ export const AllComponents = () => {
                 {__('Form', 'plugin-name')}
             </h1>
             <Card>
-                <FormInput label={'Name'} tooltip={'Please enter your name'} name={'name'} id={'name'} value={'name'} onChange={(e)=> console.log(e.target.value)}/>
-                <FormInput label={'Password'} type={'password'} name={'password'} id={'password'} value={'password'} onChange={(e)=> console.log(e.target.value)}/>
-                <FormCheckBox label={'Gender'} name={'gender'} id={'gender'} value={'Male'} checked={true} onChange={(e)=> console.log(e.target.value)}/>
-                <SelectBox title={'Country'} options={country} selected={country[0]} setSelected={()=>setCountry}/>
-                <Textarea label={'Address'} name={'address'} id={'address'} value={'address'} onChange={(e)=> console.log(e.target.value)}/>
+                <FormInput
+                    label={'Name'}
+                    tooltip={'Please enter your name'}
+                    name={'name'}
+                    id={'name'}
+                    value={'name'}
+                    onChange={(e) => console.log(e.target.value)}
+                />
+                <FormInput
+                    label={'Password'}
+                    type={'password'}
+                    name={'password'}
+                    id={'password'}
+                    value={'password'}
+                    onChange={(e) => console.log(e.target.value)}
+                />
+                <FormCheckBox
+                    label={'Gender'}
+                    name={'gender'}
+                    id={'gender'}
+                    value={'Male'}
+                    checked={true}
+                    onChange={(e) => console.log(e.target.value)}
+                />
+                <SelectBox
+                    title={'Country'}
+                    options={country}
+                    selected={country[0]}
+                    setSelected={() => setCountry}
+                />
+                <Textarea
+                    label={'Address'}
+                    name={'address'}
+                    id={'address'}
+                    value={'address'}
+                    onChange={(e) => console.log(e.target.value)}
+                />
             </Card>
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Loading', 'plugin-name')}
@@ -127,12 +159,15 @@ export const AllComponents = () => {
                 {__('Modal', 'plugin-name')}
             </h1>
             <Card>
-                <Button onClick={()=> setModal(true)}>
+                <Button onClick={() => setModal(true)}>
                     {__('Open Modal', 'plugin-name')}
                 </Button>
             </Card>
             {modal && (
-                <Modal header={__('Modal', 'plugin-name')} setShowModal={setModal}>
+                <Modal
+                    header={__('Modal', 'plugin-name')}
+                    setShowModal={setModal}
+                >
                     <p className="text-sm text-gray-500">
                         {__('Modal Content', 'plugin-name')}
                     </p>
@@ -142,14 +177,22 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Spinner', 'plugin-name')}
             </h1>
-            <Card className='overflow-hidden bg-black shadow sm:rounded-lg py-8 px-8'>
+            <Card className="overflow-hidden bg-black shadow sm:rounded-lg py-8 px-8">
                 <Spinner />
             </Card>
 
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Table', 'plugin-name')}
             </h1>
-            <Table columns={columns} data={tableData} total={tableData.length} filters={filter} isLoading={false} />
+            <Table
+                columns={columns}
+                data={tableData}
+                total={tableData.length}
+                filters={filter}
+                isLoading={false}
+                onFilterChange={() => console.log('Filter Changed')}
+                search={true}
+            />
         </div>
     );
 }
