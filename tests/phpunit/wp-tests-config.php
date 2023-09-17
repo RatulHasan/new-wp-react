@@ -41,7 +41,7 @@ define( 'WP_DEBUG', true );
  * DO NOT use a production database or one that is shared with something else.
  */
 
-define( 'DB_NAME', 'payCheckMateUnitTests' );
+define( 'DB_NAME', 'pluginNameUnitTests' );
 define( 'DB_USER', 'root' );
 define( 'DB_PASSWORD', 'password1234' );
 define( 'DB_HOST', 'localhost' );

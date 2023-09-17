@@ -75,7 +75,7 @@ final class DemoPlugin {
     }
 
     /**
-     * Construct method for PayCheckMate class.
+     * Construct method for pluginName class.
      */
     private function __construct() {
         add_action( 'init', [ $this, 'set_translation' ] );

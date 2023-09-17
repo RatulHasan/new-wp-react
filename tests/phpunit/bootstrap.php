@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package PayCheckMate
+ * @package pluginName
  */
 
 if ( PHP_MAJOR_VERSION >= 8.1 ) {

@@ -45,7 +45,7 @@ if ( ! defined( 'PLUGIN_NAME_URL' ) ) {
  *
  * @since PLUGIN_NAME_VERSION
  *
- * @return PayCheckMate
+ * @return pluginName
  */
 function plugin_name(): DemoPlugin {
     return DemoPlugin::get_instance();
