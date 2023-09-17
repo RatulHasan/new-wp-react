@@ -197,7 +197,7 @@ function processUserInputObject(pluginName) {
             if (writeErr) {
                 console.error('Error writing to file:', writeErr);
             } else {
-                console.log(`File "${oldFileName}" renamed to "${newFileName}"`);
+                console.log('\x1b[32m%s\x1b[0m', `File "${oldFileName}" renamed to "${newFileName}"`);
             }
 
             // Update other files
@@ -208,7 +208,7 @@ function processUserInputObject(pluginName) {
             // Delete demo.php
             fs.unlinkSync(oldFileName);
             // Run composer install and dump-autoload
-            console.log('Running composer install and dump-autoload -o');
+            console.log('\x1b[32m%s\x1b[0m', 'Running composer install and dump-autoload -o...');
             exec('composer install && composer dump-autoload -o', (err, stdout, stderr) => {
                 if (err) {
                     console.error(err);
@@ -224,7 +224,11 @@ function processUserInputObject(pluginName) {
 }
 
 function buildPlugin() {
-    console.log('Building the plugin');
+    console.log('\x1b[32m%s\x1b[0m', 'Building the plugin...');
+    // Remove assets folder
+    if (fs.existsSync('assets')) {
+        fs.rmdirSync('assets', { recursive: true });
+    }
     exec('npm run build', (buildErr, buildStdout, buildStderr) => {
         if (buildErr) {
             console.error(buildErr);
