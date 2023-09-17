@@ -110,8 +110,8 @@ export const AllComponents = () => {
                 {__('Form', 'plugin-name')}
             </h1>
             <Card>
-                <FormInput tooltip={'Please enter your name'} name={'name'} id={'name'} value={'name'} onChange={(e)=> console.log(e.target.value)}/>
-                <FormInput type={'password'} name={'password'} id={'password'} value={'password'} onChange={(e)=> console.log(e.target.value)}/>
+                <FormInput label={'Name'} tooltip={'Please enter your name'} name={'name'} id={'name'} value={'name'} onChange={(e)=> console.log(e.target.value)}/>
+                <FormInput label={'Password'} type={'password'} name={'password'} id={'password'} value={'password'} onChange={(e)=> console.log(e.target.value)}/>
                 <FormCheckBox label={'Gender'} name={'gender'} id={'gender'} value={'Male'} checked={true} onChange={(e)=> console.log(e.target.value)}/>
                 <SelectBox title={'Country'} options={country} selected={country[0]} setSelected={()=>setCountry}/>
                 <Textarea label={'Address'} name={'address'} id={'address'} value={'address'} onChange={(e)=> console.log(e.target.value)}/>
@@ -119,14 +119,18 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Loading', 'plugin-name')}
             </h1>
-            <Loading />
+            <Card>
+                <Loading />
+            </Card>
 
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Modal', 'plugin-name')}
             </h1>
-            <Button onClick={()=> setModal(true)}>
-                {__('Open Modal', 'plugin-name')}
-            </Button>
+            <Card>
+                <Button onClick={()=> setModal(true)}>
+                    {__('Open Modal', 'plugin-name')}
+                </Button>
+            </Card>
             {modal && (
                 <Modal header={__('Modal', 'plugin-name')} setShowModal={setModal}>
                     <p className="text-sm text-gray-500">
@@ -138,12 +142,16 @@ export const AllComponents = () => {
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Spinner', 'plugin-name')}
             </h1>
-            <Spinner />
+            <Card>
+                <div className='bg-black'>
+                    <Spinner />
+                </div>
+            </Card>
 
             <h1 className="text-base font-semibold leading-6 text-gray-900 mb-6 mt-6">
                 {__('Table', 'plugin-name')}
             </h1>
-            <Table columns={columns} data={tableData} total={tableData.length} filters={filter} />
+            <Table columns={columns} data={tableData} total={tableData.length} filters={filter} isLoading={false} />
         </div>
     );
 }
