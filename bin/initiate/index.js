@@ -225,19 +225,25 @@ function processUserInputObject(pluginName) {
                     return;
                 }
                 console.log(stdout);
-            });
-            rl.close();
 
-            // Build the plugin
-            console.log('Building the plugin');
-            exec('npm run build', (err, stdout, stderr) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log(stdout);
-            })
+                // Build the plugin after npm installation
+                buildPlugin();
+            });
         });
+    });
+}
+
+function buildPlugin() {
+    console.log('Building the plugin');
+    exec('npm run build', (buildErr, buildStdout, buildStderr) => {
+        if (buildErr) {
+            console.error(buildErr);
+            return;
+        }
+        console.log(buildStdout);
+
+        // Close the readline interface after build
+        rl.close();
     });
 }
 
