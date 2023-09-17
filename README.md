@@ -217,3 +217,6 @@ If you want to insert a new item using Base Model, you need to validate data thr
         return new WP_REST_Response( $item, 201 );
     }
 ```
+If this repository helped you, please give it a star ⭐️
+
+Happy coding 🎉
