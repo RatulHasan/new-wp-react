@@ -3,15 +3,14 @@ import {XMarkIcon} from "@heroicons/react/24/outline";
 import {applyFilters} from "../Helpers/Hooks";
 
 export const EmptyState = ({title, description, icon}: { title?: string, description?: string, icon?: any }) => {
-    let red = applyFilters('plugin-name.red', 'gray');
     return (
         <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
             <div className="text-center">
                 <div className="flex flex-col items-center justify-center">
                     <div className="flex flex-col items-center justify-center">
-                        <div className={"flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-"+red+"-100/80"}>
+                        <div className={"flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-red-100/80"}>
                             {icon ? icon : <XMarkIcon
-                                className={"w-8 h-8 text-"+red+"-600"}
+                                className={"w-8 h-8 text-red-600"}
                                 aria-hidden="true"
                             />}
                         </div>

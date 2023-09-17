@@ -1,6 +1,5 @@
 import {HTMLAttributes} from "react";
 import {Link} from "react-router-dom";
-import {applyFilters} from "../Helpers/Hooks";
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     path?: string;
@@ -12,7 +11,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button = ({className, children, onClick, path, type = 'button', disabled = false}: ButtonProps) => {
-    let buttonClassName = applyFilters('plugin-name.button_class_name', 'btn-primary-gray')
+    let buttonClassName = 'btn-primary'
     const buttonClass = className ? `${buttonClassName} ${className}` : buttonClassName;
 
     const handleClick = () => {

@@ -36,11 +36,9 @@ export default function Main() {
         },
     ] as NavigationType[];
 
-    navigations = applyFilters('plugin-name.sidebar_navigations', navigations);
     let paths = [
         {key: 'general/:id', title: __('General', 'plugin-name'), href: 'settings/general/:id', icon: CogIcon, current: false, component: Dashboard},
     ];
-    paths = applyFilters('plugin-name.routes', paths);
 
     return (
         <>

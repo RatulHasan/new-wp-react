@@ -1,5 +1,3 @@
-import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
 import Tooltip from "./Tooltip";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 
@@ -66,9 +64,6 @@ export const FormInput = ({label, name, id, className = "", type = "text", place
                         {helpText}
                     </p>
                 )}
-                {/*{!isSelectionValid && (*/}
-                {/*    <p className="mt-2 text-sm text-red-600">{__('This field is required.', 'plugin-name')}</p>*/}
-                {/*)}*/}
             </div>
             {error && (
                 <p className="mt-2 text-sm text-red-600" id={'error'+id}>

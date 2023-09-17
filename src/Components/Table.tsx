@@ -146,7 +146,6 @@ export const Table = ({columns, data, filters, total, isLoading = true, totalPag
         });
     }, 1000), []);
 
-    const color = applyFilters('plugin-name.pagination_button_color', 'gray');
     return (
         <>
             {isLoading ? (
@@ -246,7 +245,7 @@ export const Table = ({columns, data, filters, total, isLoading = true, totalPag
                     <Button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className={`px-4 py-1 mr-6 text-sm text-white focus:outline-none ` + (currentPage === 1 ? `cursor-not-allowed bg-${color}-500` : "")}
+                        className={`px-4 py-1 mr-6 text-sm text-white focus:outline-none ` + (currentPage === 1 ? `cursor-not-allowed bg-indigo-500` : "")}
                     >
                         <ArrowLeftIcon className="w-4 h-4" />
                         {__("Previous", "plugin-name")}
@@ -293,7 +292,7 @@ export const Table = ({columns, data, filters, total, isLoading = true, totalPag
                     <Button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === parseInt(String(totalPages))}
-                        className={`px-4 py-1 ml-6 text-sm text-white focus:outline-none ` + (currentPage === parseInt(String(totalPages)) ? `cursor-not-allowed bg-${color}-500` : "")}
+                        className={`px-4 py-1 ml-6 text-sm text-white focus:outline-none ` + (currentPage === parseInt(String(totalPages)) ? `cursor-not-allowed bg-indigo-500` : "")}
                     >
                     {__("Next", "plugin-name")}
                         <ArrowRightIcon className="w-4 h-4" />
